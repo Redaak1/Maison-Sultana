@@ -223,7 +223,7 @@ input:focus, textarea:focus, select:focus {
         <label for="customerAddress">Adresse de livraison *</label>
         <textarea id="customerAddress" name="customerAddress"
           autocomplete="street-address" required maxlength="500" rows="3"
-          placeholder="Sélectionnez une adresse ou déplacez le repère sur la carte..."></textarea>
+          placeholder="Saisissez votre quartier, rue, numéro, immeuble et étage..."></textarea>
         <input type="hidden" id="deliveryLatitude" name="deliveryLatitude">
         <input type="hidden" id="deliveryLongitude" name="deliveryLongitude">
 
@@ -340,17 +340,8 @@ input:focus, textarea:focus, select:focus {
   }
 
   async function reverseLookup(lat, lon) {
-    try {
-      const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
-        encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
-      const response = await fetch(url, { headers: { "Accept": "application/json" } });
-      if (!response.ok) throw new Error("reverse lookup failed");
-      const result = await response.json();
-      if (result.display_name) addressInput.value = result.display_name;
-      status.textContent = "Position sélectionnée. Vérifiez l'adresse avant de commander.";
-    } catch (_) {
-      status.textContent = "Position enregistrée. Vous pouvez compléter l'adresse manuellement.";
-    }
+    status.textContent =
+      "Position GPS sélectionnée. Veuillez saisir votre adresse de livraison manuellement.";
   }
 
   async function selectCoordinates(lat, lon, reverse = false) {
