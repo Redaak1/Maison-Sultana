@@ -189,6 +189,9 @@ input:focus, textarea:focus, select:focus {
       <div style="margin-top:14px;padding-top:14px;border-top:1px solid #d9c8b4">
         <div style="font-size:13px;color:#70665d">Frais de préparation</div>
         <div id="orderPreparationFee">0 DH</div>
+        <div style="font-size:13px;color:#70665d;margin-top:8px">Frais de livraison</div>
+        <div class="product-price" id="orderDeliveryFee">À calculer</div>
+        <div id="deliveryDistance" style="font-size:12px;color:#70665d;margin-top:4px">Sélectionnez votre position sur la carte pour calculer la livraison.</div>
         <div style="font-size:13px;color:#70665d;margin-top:10px">Total de la commande</div>
         <div class="product-price" id="orderTotal">—</div>
       </div>
@@ -257,15 +260,113 @@ input:focus, textarea:focus, select:focus {
   const cartItemsContainer = document.getElementById("orderCartItems");
   const orderTotalElement = document.getElementById("orderTotal");
   const preparationFeeElement = document.getElementById("orderPreparationFee");
+  const deliveryFeeElement = document.getElementById("orderDeliveryFee");
+  const deliveryDistanceElement = document.getElementById("deliveryDistance");
   const orderSubmitButton = document.querySelector('#orderForm button[type="submit"]');
 
   const preparationFee = orderCart.some(item => item.choice === "ready") ? 20 : 0;
   const subtotal = orderCart.reduce((sum, item) =>
     sum + Number(item.price) * Number(item.quantity), 0);
-  const orderTotal = subtotal + preparationFee;
+
+  const depotLat = 33.5831012;
+  const depotLon = -7.6389115;
+  let deliveryFee = null;
+  let deliveryDistanceKm = null;
+  let deliveryState = "unselected";
+  let routeRequestNumber = 0;
 
   function money(value) {
-    return Number(value).toLocaleString("fr-FR") + " DH";
+    return Number(value).toLocaleString("fr-FR", {
+      maximumFractionDigits: 2
+    }) + " DH";
+  }
+
+  function updateOrderTotals() {
+    preparationFeeElement.textContent = money(preparationFee);
+
+    if (deliveryState !== "ready" || deliveryFee === null) {
+      deliveryFeeElement.textContent =
+        deliveryState === "over_limit" ? "À confirmer" :
+        deliveryState === "error" ? "Indisponible" :
+        deliveryState === "calculating" ? "Calcul en cours..." :
+        "À calculer";
+      orderTotalElement.textContent = "À confirmer";
+      return;
+    }
+
+    deliveryFeeElement.textContent = money(deliveryFee);
+    orderTotalElement.textContent =
+      money(subtotal + preparationFee + deliveryFee);
+  }
+
+  function calculateDeliveryTariff(roundedKm) {
+    if (roundedKm <= 1) return 15;
+    if (roundedKm <= 2) return 20;
+    if (roundedKm <= 3) return 25;
+    if (roundedKm <= 5) return 30;
+    if (roundedKm <= 6) return 35;
+    if (roundedKm <= 7) return 40;
+    if (roundedKm <= 10) return 45;
+    if (roundedKm <= 13) return 50;
+    if (roundedKm <= 20) return 50 + (roundedKm - 13) * 3.5;
+    return null;
+  }
+
+  async function calculateDelivery(lat, lon) {
+    const requestId = ++routeRequestNumber;
+    deliveryState = "calculating";
+    deliveryFee = null;
+    deliveryDistanceKm = null;
+    deliveryDistanceElement.textContent = "Calcul de la distance routière...";
+    updateOrderTotals();
+
+    try {
+      const routeUrl =
+        "https://router.project-osrm.org/route/v1/driving/" +
+        depotLon + "," + depotLat + ";" + lon + "," + lat +
+        "?overview=false";
+
+      const response = await fetch(routeUrl);
+      if (!response.ok) throw new Error("Route indisponible");
+
+      const result = await response.json();
+      if (requestId !== routeRequestNumber) return;
+
+      if (result.code !== "Ok" || !result.routes || !result.routes.length) {
+        throw new Error("Aucun itinéraire trouvé");
+      }
+
+      const distanceKm = result.routes[0].distance / 1000;
+      if (!Number.isFinite(distanceKm) || distanceKm < 0) {
+        throw new Error("Distance invalide");
+      }
+
+      const roundedKm = Math.ceil(distanceKm);
+      deliveryDistanceKm = distanceKm;
+      deliveryFee = calculateDeliveryTariff(roundedKm);
+
+      if (deliveryFee === null) {
+        deliveryState = "over_limit";
+        deliveryDistanceElement.textContent =
+          "Distance routière : " + distanceKm.toFixed(1) +
+          " km (arrondie à " + roundedKm +
+          " km). Livraison au-delà de 20 km : à confirmer.";
+      } else {
+        deliveryState = "ready";
+        deliveryDistanceElement.textContent =
+          "Distance routière : " + distanceKm.toFixed(1) +
+          " km (arrondie à " + roundedKm + " km).";
+      }
+    } catch (_) {
+      if (requestId !== routeRequestNumber) return;
+      deliveryState = "error";
+      deliveryFee = null;
+      deliveryDistanceKm = null;
+      deliveryDistanceElement.textContent =
+        "Calcul impossible. Réessayez de sélectionner votre position.";
+    }
+
+    updateOrderTotals();
   }
 
   if (!orderCart.length) {
@@ -297,8 +398,7 @@ input:focus, textarea:focus, select:focus {
     });
   }
 
-  preparationFeeElement.textContent = money(preparationFee);
-  orderTotalElement.textContent = money(orderTotal);
+  updateOrderTotals();
 
   // Interactive delivery map and address search.
   const addressInput = document.getElementById("customerAddress");
@@ -337,6 +437,8 @@ input:focus, textarea:focus, select:focus {
     } else {
       marker.setLatLng([chosenLat, chosenLon]);
     }
+
+    calculateDelivery(chosenLat, chosenLon);
   }
 
   async function reverseLookup(lat, lon) {
@@ -428,6 +530,27 @@ input:focus, textarea:focus, select:focus {
       return;
     }
 
+    if (chosenLat === null || chosenLon === null) {
+      alert("Veuillez sélectionner votre position de livraison sur la carte.");
+      return;
+    }
+
+    if (deliveryState === "calculating") {
+      alert("Le calcul des frais de livraison est en cours. Veuillez patienter.");
+      return;
+    }
+
+    if (deliveryState === "over_limit") {
+      alert("Votre adresse est à plus de 20 km. Veuillez nous contacter pour confirmer les frais de livraison.");
+      return;
+    }
+
+    if (deliveryState !== "ready" || deliveryFee === null) {
+      alert("Les frais de livraison n'ont pas pu être calculés. Réessayez de choisir votre position.");
+      return;
+    }
+
+    const orderTotal = subtotal + preparationFee + deliveryFee;
     const data = new FormData(this);
     const messageLines = [
       "✨ LA MAISON SULTANA",
@@ -440,10 +563,10 @@ input:focus, textarea:focus, select:focus {
       "",
       "📍 LIVRAISON",
       "Adresse : " + data.get("customerAddress"),
-      (chosenLat !== null && chosenLon !== null)
-        ? "Localisation GPS : https://www.google.com/maps?q=" +
-          encodeURIComponent(chosenLat + "," + chosenLon)
-        : "Localisation GPS : non sélectionnée",
+      "Localisation GPS : https://www.google.com/maps?q=" +
+        encodeURIComponent(chosenLat + "," + chosenLon),
+      "Distance routière : " + deliveryDistanceKm.toFixed(1) + " km",
+      "Frais de livraison : " + money(deliveryFee),
       "",
       "🛍️ DÉTAILS DE LA COMMANDE",
       "━━━━━━━━━━━━━━━━━━"
