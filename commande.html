@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#500911">
+<title>Finaliser ma commande | La Maison Sultana</title>
+<style>
+:root {
+  --burgundy: #500911;
+  --gold: #B88738;
+  --cream: #F0E3D2;
+  --ink: #1F1F1F;
+  --white: #fffaf4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+header {
+  background: var(--burgundy);
+  color: var(--white);
+  text-align: center;
+  padding: 25px 16px;
+  border-bottom: 3px solid var(--gold);
+}
+.brand {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  letter-spacing: 3px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+header h1 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: clamp(25px, 5vw, 38px);
+  margin: 8px 0 3px;
+}
+header p { margin: 0; color: #f0e3d2; font-size: 14px; }
+main { max-width: 960px; margin: 35px auto; padding: 0 16px 40px; }
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 24px;
+  align-items: start;
+}
+.panel {
+  background: var(--white);
+  border: 1px solid rgba(184,135,56,.55);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 25px rgba(31,31,31,.06);
+}
+h2 {
+  color: var(--burgundy);
+  font: normal 24px Georgia, serif;
+  margin: 0 0 18px;
+}
+.product-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  background: #eee1d0;
+}
+.product-name {
+  color: var(--burgundy);
+  font: normal 26px Georgia, serif;
+  margin: 0 0 8px;
+}
+.product-price { color: var(--burgundy); font-weight: bold; font-size: 20px; }
+.product-note { color: #70665d; font-size: 13px; }
+label { display: block; font-size: 13px; font-weight: bold; margin: 15px 0 6px; }
+input, textarea, select {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9c8b4;
+  border-radius: 6px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+.choices { display: flex; gap: 18px; flex-wrap: wrap; }
+.choices label {
+  display: flex; align-items: center; gap: 7px;
+  font-weight: normal; margin: 5px 0;
+}
+.choices input { width: auto; accent-color: var(--burgundy); }
+.submit {
+  width: 100%; border: 1px solid var(--gold); border-radius: 6px;
+  padding: 14px 18px; margin-top: 22px;
+  background: var(--burgundy); color: white; font-weight: bold;
+  font-size: 15px; cursor: pointer; transition: .2s;
+}
+.submit:hover { background: #6a111b; }
+.privacy { color: #71665c; font-size: 12px; margin-top: 12px; }
+.back { display: inline-block; color: var(--burgundy); margin-bottom: 18px; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+@media (max-width: 700px) {
+  main { margin-top: 20px; }
+  .layout { grid-template-columns: 1fr; }
+  .panel { padding: 19px; }
+  .product-image { max-height: 260px; }
+}
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style id="delivery-map-styles">
+  .map-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .location-button {
+    align-self: flex-start;
+    padding: 10px 14px;
+    border: 1px solid #B88738;
+    background: #500911;
+    color: #F0E3D2;
+    cursor: pointer;
+    font: inherit;
+  }
+  #locationStatus {
+    color: #70665d;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  #deliveryMap {
+    width: 100%;
+    height: 340px;
+    margin: 10px 0 18px;
+    border: 1px solid #d9c8b4;
+    z-index: 1;
+    background: #eee8df;
+  }
+  .address-suggestions {
+    position: relative;
+    z-index: 5;
+  }
+  .address-suggestion {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid #d9c8b4;
+    border-top: 0;
+    background: #fff;
+    color: #1F1F1F;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+  }
+  .address-suggestion:hover,
+  .address-suggestion:focus {
+    background: #F0E3D2;
+  }
+  @media (max-width: 600px) {
+    #deliveryMap { height: 300px; }
+  }
+</style>
+
+</head>
+<body>
+<header>
+  <div class="brand">La Maison Sultana</div>
+  <h1>Finaliser ma commande</h1>
+  <p>Votre sélection, préparée avec soin.</p>
+</header>
+
+<main>
+  <a class="back" id="backLink" href="redesign-preview.html">← Retour aux packs</a>
+  <div class="layout">
+    <section class="panel" aria-label="Résumé de la commande">
+      <h2>Résumé de votre commande</h2>
+      <div id="orderCartItems" aria-live="polite"></div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid #d9c8b4">
+        <div style="font-size:13px;color:#70665d">Frais de préparation</div>
+        <div id="orderPreparationFee">0 DH</div>
+        <div style="font-size:13px;color:#70665d;margin-top:10px">Total de la commande</div>
+        <div class="product-price" id="orderTotal">—</div>
+      </div>
+      <p class="product-note">Vérifiez votre commande avant de l'envoyer sur WhatsApp.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Vos coordonnées</h2>
+      <form id="orderForm">
+        <label for="customerName">Nom complet *</label>
+        <input id="customerName" name="customerName" autocomplete="name" required maxlength="100" placeholder="Votre nom et prénom">
+
+        <label for="customerPhone">Téléphone *</label>
+        <input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" required maxlength="25" placeholder="Votre numéro de téléphone">
+
+        <label for="addressSearch">Rechercher une adresse</label>
+        <input id="addressSearch" type="search" autocomplete="off"
+          placeholder="Ex. : quartier, rue, ville...">
+        <div id="addressSuggestions" class="address-suggestions" role="listbox"></div>
+
+        <div class="map-actions">
+          <button type="button" id="useMyLocation" class="location-button">
+            ◎ Utiliser ma position GPS
+          </button>
+          <span id="locationStatus" role="status" aria-live="polite">
+            Recherchez une adresse ou sélectionnez un point sur la carte.
+          </span>
+        </div>
+
+        <div id="deliveryMap" aria-label="Carte pour choisir l'adresse de livraison"></div>
+
+        <label for="customerAddress">Adresse de livraison *</label>
+        <textarea id="customerAddress" name="customerAddress"
+          autocomplete="street-address" required maxlength="500" rows="3"
+          placeholder="Sélectionnez une adresse ou déplacez le repère sur la carte..."></textarea>
+        <input type="hidden" id="deliveryLatitude" name="deliveryLatitude">
+        <input type="hidden" id="deliveryLongitude" name="deliveryLongitude">
+
+        <label for="notes">Remarques (facultatif)</label>
+        <textarea id="notes" name="notes" rows="2" maxlength="500" placeholder="Instructions pour la livraison..."></textarea>
+
+        <button class="submit" type="submit">Envoyer ma commande sur WhatsApp</button>
+        <p class="privacy">Vos informations seront incluses dans le message WhatsApp afin de traiter votre commande. Vérifiez-les avant l'envoi.</p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  let orderCart = [];
+  try {
+    orderCart = JSON.parse(sessionStorage.getItem("maisonSultanaCartV1") || "[]");
+  } catch (_) {
+    orderCart = [];
+  }
+
+  if (!Array.isArray(orderCart)) orderCart = [];
+  orderCart = orderCart.filter(item =>
+    item && typeof item.name === "string" &&
+    Number(item.price) >= 0 && Number(item.quantity) > 0 &&
+    (item.choice === "ready" || item.choice === "frozen")
+  );
+
+  const cartItemsContainer = document.getElementById("orderCartItems");
+  const orderTotalElement = document.getElementById("orderTotal");
+  const preparationFeeElement = document.getElementById("orderPreparationFee");
+  const orderSubmitButton = document.querySelector('#orderForm button[type="submit"]');
+
+  const preparationFee = orderCart.some(item => item.choice === "ready") ? 20 : 0;
+  const subtotal = orderCart.reduce((sum, item) =>
+    sum + Number(item.price) * Number(item.quantity), 0);
+  const orderTotal = subtotal + preparationFee;
+
+  function money(value) {
+    return Number(value).toLocaleString("fr-FR") + " DH";
+  }
+
+  if (!orderCart.length) {
+    const empty = document.createElement("p");
+    empty.textContent = "Votre panier est vide. Retournez aux packs pour choisir vos produits.";
+    cartItemsContainer.appendChild(empty);
+    orderSubmitButton.disabled = true;
+  } else {
+    orderCart.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.style.cssText = "padding:12px 0;border-bottom:1px solid #d9c8b4";
+
+      const title = document.createElement("strong");
+      title.textContent = (index + 1) + ". " +
+        (sessionStorage.getItem("maisonSultanaLanguageV1") === "ar"
+          ? (item.arabicName || item.name) : item.name);
+      row.appendChild(title);
+
+      const details = document.createElement("p");
+      details.className = "product-note";
+      details.textContent =
+        "Préparation : " + (item.choice === "ready" ? "Prêtes à déguster" : "Surgelées") +
+        " · Quantité : " + item.quantity +
+        " · Prix unitaire : " + money(item.price) +
+        " · Total : " + money(Number(item.price) * Number(item.quantity));
+      row.appendChild(details);
+
+      cartItemsContainer.appendChild(row);
+    });
+  }
+
+  preparationFeeElement.textContent = money(preparationFee);
+  orderTotalElement.textContent = money(orderTotal);
+
+  // Interactive delivery map and address search.
+  const addressInput = document.getElementById("customerAddress");
+  const searchInput = document.getElementById("addressSearch");
+  const suggestions = document.getElementById("addressSuggestions");
+  const status = document.getElementById("locationStatus");
+  const gpsButton = document.getElementById("useMyLocation");
+  const latInput = document.getElementById("deliveryLatitude");
+  const lonInput = document.getElementById("deliveryLongitude");
+
+  let chosenLat = null;
+  let chosenLon = null;
+  let searchTimer = null;
+  let requestNumber = 0;
+
+  const map = L.map("deliveryMap").setView([31.7917, -7.0926], 5);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  let marker = null;
+
+  function setCoordinates(lat, lon) {
+    chosenLat = Number(lat);
+    chosenLon = Number(lon);
+    latInput.value = chosenLat.toFixed(6);
+    lonInput.value = chosenLon.toFixed(6);
+
+    if (!marker) {
+      marker = L.marker([chosenLat, chosenLon], { draggable: true }).addTo(map);
+      marker.on("dragend", () => {
+        const pos = marker.getLatLng();
+        selectCoordinates(pos.lat, pos.lng, true);
+      });
+    } else {
+      marker.setLatLng([chosenLat, chosenLon]);
+    }
+  }
+
+  async function reverseLookup(lat, lon) {
+    try {
+      const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
+        encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
+      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+      if (!response.ok) throw new Error("reverse lookup failed");
+      const result = await response.json();
+      if (result.display_name) addressInput.value = result.display_name;
+      status.textContent = "Position sélectionnée. Vérifiez l'adresse avant de commander.";
+    } catch (_) {
+      status.textContent = "Position enregistrée. Vous pouvez compléter l'adresse manuellement.";
+    }
+  }
+
+  async function selectCoordinates(lat, lon, reverse = false) {
+    setCoordinates(lat, lon);
+    map.setView([lat, lon], Math.max(map.getZoom(), 16));
+    if (reverse) await reverseLookup(lat, lon);
+    else status.textContent = "Position sélectionnée. Vérifiez l'adresse.";
+  }
+
+  map.on("click", event => {
+    selectCoordinates(event.latlng.lat, event.latlng.lng, true);
+  });
+
+  searchInput.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    const query = searchInput.value.trim();
+    suggestions.replaceChildren();
+
+    if (query.length < 3) return;
+
+    searchTimer = setTimeout(async () => {
+      const currentRequest = ++requestNumber;
+      status.textContent = "Recherche d'adresses...";
+      try {
+        const url = "https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&countrycodes=ma&q=" +
+          encodeURIComponent(query);
+        const response = await fetch(url, { headers: { "Accept": "application/json" } });
+        if (!response.ok) throw new Error("search failed");
+        const results = await response.json();
+        if (currentRequest !== requestNumber) return;
+
+        suggestions.replaceChildren();
+        if (!results.length) {
+          status.textContent = "Aucune adresse trouvée. Essayez un autre terme ou choisissez sur la carte.";
+          return;
+        }
+
+        results.forEach(result => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "address-suggestion";
+          button.setAttribute("role", "option");
+          button.textContent = result.display_name;
+          button.addEventListener("click", () => {
+            addressInput.value = result.display_name;
+            searchInput.value = result.display_name;
+            suggestions.replaceChildren();
+            selectCoordinates(Number(result.lat), Number(result.lon), false);
+          });
+          suggestions.appendChild(button);
+        });
+        status.textContent = "Choisissez une adresse dans la liste, ou sélectionnez un point sur la carte.";
+      } catch (_) {
+        status.textContent = "La recherche d'adresse est indisponible. Vous pouvez sélectionner le point sur la carte ou saisir l'adresse manuellement.";
+      }
+    }, 800);
+  });
+
+  gpsButton.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      status.textContent = "La géolocalisation n'est pas prise en charge par ce navigateur.";
+      return;
+    }
+    status.textContent = "Recherche de votre position GPS...";
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        selectCoordinates(position.coords.latitude, position.coords.longitude, true);
+      },
+      error => {
+        const message = error.code === 1
+          ? "Autorisez l'accès à votre position dans le navigateur pour utiliser le GPS."
+          : "Impossible d'obtenir votre position. Vérifiez le GPS ou choisissez sur la carte.";
+        status.textContent = message;
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+    );
+  });
+
+  document.getElementById("orderForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (!this.reportValidity()) return;
+
+    if (!orderCart.length) {
+      alert("Votre panier est vide. Retournez aux packs pour choisir vos produits.");
+      return;
+    }
+
+    const data = new FormData(this);
+    const messageLines = [
+      "NOUVELLE COMMANDE — LA MAISON SULTANA",
+      "",
+      "Nom : " + data.get("customerName"),
+      "Téléphone : " + data.get("customerPhone"),
+      "Adresse : " + data.get("customerAddress"),
+      (chosenLat !== null && chosenLon !== null)
+        ? "Position GPS : https://www.google.com/maps?q=" +
+          encodeURIComponent(chosenLat + "," + chosenLon)
+        : "Position GPS : non sélectionnée",
+      "",
+      "DÉTAILS DE LA COMMANDE"
+    ];
+
+    orderCart.forEach((item, index) => {
+      messageLines.push(
+        (index + 1) + ". " + item.name,
+        "   Préparation : " + (item.choice === "ready" ? "Prêtes à déguster" : "Surgelées"),
+        "   Quantité : " + item.quantity,
+        "   Prix unitaire : " + money(item.price),
+        "   Total de la ligne : " + money(Number(item.price) * Number(item.quantity)),
+        ""
+      );
+    });
+
+    if (preparationFee > 0) {
+      messageLines.push("Frais de préparation : " + money(preparationFee));
+    }
+    messageLines.push("TOTAL DE LA COMMANDE : " + money(orderTotal));
+
+    const notes = String(data.get("notes") || "").trim();
+    if (notes) messageLines.push("", "Remarques : " + notes);
+
+    const whatsappUrl = "https://wa.me/212776154988?text=" +
+      encodeURIComponent(messageLines.join("\n"));
+    window.location.href = whatsappUrl;
+  });
+})();
+</script>
+</body>
+</html>
