@@ -430,37 +430,57 @@ input:focus, textarea:focus, select:focus {
 
     const data = new FormData(this);
     const messageLines = [
-      "NOUVELLE COMMANDE — LA MAISON SULTANA",
+      "✨ LA MAISON SULTANA",
+      "━━━━━━━━━━━━━━━━━━",
+      "Bonjour, je souhaite confirmer ma commande chez La Maison Sultana.",
       "",
-      "Nom : " + data.get("customerName"),
+      "👤 INFORMATIONS CLIENT",
+      "Nom complet : " + data.get("customerName"),
       "Téléphone : " + data.get("customerPhone"),
+      "",
+      "📍 LIVRAISON",
       "Adresse : " + data.get("customerAddress"),
       (chosenLat !== null && chosenLon !== null)
-        ? "Position GPS : https://www.google.com/maps?q=" +
+        ? "Localisation GPS : https://www.google.com/maps?q=" +
           encodeURIComponent(chosenLat + "," + chosenLon)
-        : "Position GPS : non sélectionnée",
+        : "Localisation GPS : non sélectionnée",
       "",
-      "DÉTAILS DE LA COMMANDE"
+      "🛍️ DÉTAILS DE LA COMMANDE",
+      "━━━━━━━━━━━━━━━━━━"
     ];
 
     orderCart.forEach((item, index) => {
       messageLines.push(
+        "",
         (index + 1) + ". " + item.name,
         "   Préparation : " + (item.choice === "ready" ? "Prêtes à déguster" : "Surgelées"),
         "   Quantité : " + item.quantity,
         "   Prix unitaire : " + money(item.price),
-        "   Total de la ligne : " + money(Number(item.price) * Number(item.quantity)),
-        ""
+        "   Total de la ligne : " + money(Number(item.price) * Number(item.quantity))
       );
     });
 
     if (preparationFee > 0) {
-      messageLines.push("Frais de préparation : " + money(preparationFee));
+      messageLines.push("", "Frais de préparation : " + money(preparationFee));
     }
-    messageLines.push("TOTAL DE LA COMMANDE : " + money(orderTotal));
+
+    messageLines.push(
+      "",
+      "━━━━━━━━━━━━━━━━━━",
+      "💎 TOTAL DE LA COMMANDE : " + money(orderTotal),
+      "━━━━━━━━━━━━━━━━━━"
+    );
 
     const notes = String(data.get("notes") || "").trim();
-    if (notes) messageLines.push("", "Remarques : " + notes);
+    if (notes) {
+      messageLines.push("", "📝 REMARQUES", notes);
+    }
+
+    messageLines.push(
+      "",
+      "Merci pour votre confiance. 🤍",
+      "LA MAISON SULTANA — L'élégance du goût."
+    );
 
     const whatsappUrl = "https://wa.me/212776154988?text=" +
       encodeURIComponent(messageLines.join("\n"));
