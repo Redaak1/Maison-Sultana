@@ -238,6 +238,45 @@
       text-transform: uppercase;
     }
 
+
+    .pack-quantity {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 18px;
+    }
+
+    .prep-options {
+      display: grid;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .prep-options label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px;
+      border: 1px solid #E5D7C7;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .prep-options input {
+      accent-color: var(--burgundy);
+    }
+
+    .price-hint {
+      color: var(--muted);
+      font-size: 9px;
+      margin: -12px 0 18px;
+    }
+
+    @media (min-width: 761px) {
+      .packs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
     .pack-body {
       padding: 32px 25px;
       display: flex;
@@ -462,7 +501,630 @@
         letter-spacing: 2px;
       }
     }
-  </style>
+  
+/* Pack layout: 3 on the first row, 2 centered on the second */
+@media (min-width: 768px) {
+  .packs {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .packs > .pack {
+    grid-column: span 2;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .packs > .pack:nth-of-type(4) {
+    grid-column: 2 / span 2;
+  }
+
+  .packs > .pack:nth-of-type(5) {
+    grid-column: 4 / span 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .packs {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .packs > .pack {
+    grid-column: 1;
+    width: 100%;
+  }
+}
+
+
+/* Balanced layout: 3 packs above, 2 centered below */
+@media (min-width: 768px) {
+  .packs {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 28px 22px !important;
+    align-items: stretch;
+  }
+
+  .packs > .pack {
+    grid-column: span 2 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    justify-self: stretch;
+  }
+
+  .packs > .pack:nth-child(4) {
+    grid-column: 2 / span 2 !important;
+  }
+
+  .packs > .pack:nth-child(5) {
+    grid-column: 4 / span 2 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .packs {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  .packs > .pack {
+    grid-column: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+}
+
+
+/* Product images */
+.pack-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  margin: 0 0 18px;
+}
+
+
+/* La Maison Sultana — cart button matching the Contact button */
+.cart-open {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  min-width: 108px;
+  padding: 10px 17px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--cream);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color .2s, border-color .2s, color .2s, transform .2s;
+}
+
+.cart-open:hover {
+  background: transparent;
+  color: var(--gold);
+  border-color: transparent;
+}
+
+.cart-open:active {
+  transform: translateY(1px);
+}
+
+.cart-open:focus-visible {
+  outline: 3px solid #B88738;
+  outline-offset: 3px;
+}
+
+.cart-open-icon {
+  display: block;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.cart-open-label {
+  line-height: 1.2;
+}
+
+#cartCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  border: 1px solid var(--gold);
+  border-radius: 50px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .cart-open {
+    min-width: 44px;
+    min-height: 44px;
+    gap: 7px;
+    padding: 8px 10px;
+  }
+  .cart-open-label {
+    font-size: 13px;
+  }
+}
+
+</style>
+<style>
+
+</style>
+<style>
+
+
+</style>
+<style>
+
+
+</style>
+<style>
+
+/* Mobile: one pack per row */
+@media screen and (max-width: 768px) {
+  section.packs {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+</style>
+<style>
+
+
+</style>
+<style>
+
+/* Five-pack layout */
+section.packs {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+}
+section.packs > article.pack {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  border: 1px solid #B88738 !important;
+  border-radius: 16px !important;
+}
+section.packs > article.pack .pack-price {
+  font-size: clamp(2rem, 2.8vw, 2.7rem) !important;
+  font-weight: 900 !important;
+  color: #B88738 !important;
+}
+section.packs .pack-items {
+  padding-left: 20px;
+  margin: 14px 0;
+  line-height: 1.8;
+}
+@media (max-width: 768px) {
+  section.packs {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+</style>
+
+<style id="final-packs-layout">
+@media (min-width: 768px) {
+  html body section.packs {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 28px 22px !important;
+    align-items: stretch !important;
+  }
+
+  html body section.packs > article.pack {
+    grid-column: span 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+  }
+
+  html body section.packs > article.pack:nth-child(4) {
+    grid-column: 2 / span 2 !important;
+  }
+
+  html body section.packs > article.pack:nth-child(5) {
+    grid-column: 4 / span 2 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html body section.packs {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  html body section.packs > article.pack {
+    grid-column: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+}
+</style>
+
+
+<style id="pack-spacing-alignment-fix">
+
+/* Pack description and contents alignment fix */
+.pack h3 {
+    margin-bottom: 8px !important;
+}
+
+.pack p {
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+}
+
+.pack ul,
+.pack ol,
+.pack .pack-details,
+.pack .pack-description,
+.pack .ingredients,
+.pack .composition {
+    text-align: left !important;
+    padding-left: 20px !important;
+    margin-top: 6px !important;
+}
+
+.pack li {
+    text-align: left !important;
+    list-style-position: outside !important;
+    margin-bottom: 4px !important;
+}
+
+.pack .quantity,
+.pack .pieces,
+.pack .pack-quantity {
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+}
+
+</style>
+
+<style id="prep-options-one-line">
+
+/* Keep preparation options on one line */
+.pack .prep-options,
+.pack .preparation-options,
+.pack .product-options,
+.pack .format-options {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+.pack .prep-options > *,
+.pack .preparation-options > *,
+.pack .product-options > *,
+.pack .format-options > * {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    padding: 10px 5px !important;
+    font-size: 13px !important;
+}
+
+</style>
+
+<style id="prep-options-frameless">
+
+/* Frameless preparation options */
+.pack .prep-options,
+.pack .preparation-options,
+.pack .product-options,
+.pack .format-options {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 18px !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.pack .prep-options > *,
+.pack .preparation-options > *,
+.pack .product-options > *,
+.pack .format-options > * {
+    flex: 0 1 auto !important;
+    white-space: nowrap !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 4px 0 !important;
+    text-align: left !important;
+}
+
+</style>
+
+<style id="prep-options-centered">
+
+/* Center frameless preparation options */
+.pack .prep-options,
+.pack .preparation-options,
+.pack .product-options,
+.pack .format-options {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 24px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.pack .prep-options > *,
+.pack .preparation-options > *,
+.pack .product-options > *,
+.pack .format-options > * {
+    flex: 0 1 auto !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 4px 0 !important;
+}
+
+</style>
+
+<style id="pack-description-quantity-spacing">
+
+/* Reduce spacing between pack description and piece count */
+.pack p {
+    margin-bottom: 4px !important;
+}
+
+.pack .quantity,
+.pack .pieces,
+.pack .pack-quantity {
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
+}
+
+</style>
+
+<style id="sultana-cart-styles">
+.cart-trigger {
+  display:inline-flex; align-items:center; gap:9px; cursor:pointer;
+  border:1px solid #B88738; border-radius:999px; padding:10px 14px;
+  color:#F0E3D2; background:#500911; font:inherit; letter-spacing:.04em;
+}
+.cart-count {
+  display:inline-grid; place-items:center; min-width:22px; height:22px;
+  padding:0 5px; border-radius:50px; background:#B88738; color:#1F1F1F;
+  font-size:12px; font-weight:800;
+}
+.cart-overlay {
+  position:fixed; inset:0; z-index:9998; background:rgba(20,10,10,.58);
+  backdrop-filter:blur(2px);
+}
+.cart-overlay[hidden] { display:none; }
+.cart-drawer {
+  position:fixed; z-index:9999; top:0; right:0; width:min(460px,100%);
+  height:100dvh; overflow-y:auto; box-sizing:border-box;
+  padding:25px; background:#F0E3D2; color:#1F1F1F;
+  border-left:3px solid #B88738; box-shadow:-16px 0 50px #0002;
+  transform:translateX(105%); visibility:hidden;
+  transition:transform .28s ease, visibility .28s ease;
+}
+html[dir="rtl"] .cart-drawer {
+  right:auto; left:0; border-left:0; border-right:3px solid #B88738;
+  transform:translateX(-105%);
+}
+.cart-drawer.is-open { transform:translateX(0); visibility:visible; }
+.cart-is-open { overflow:hidden; }
+.cart-head { display:flex; justify-content:space-between; align-items:center; gap:16px; padding-bottom:18px; border-bottom:1px solid #B88738; }
+.cart-kicker { margin:0 0 5px; color:#8B6A32; font-size:11px; letter-spacing:.16em; }
+.cart-head h2 { margin:0; color:#500911; font-size:28px; }
+.cart-close { border:1px solid #B88738; border-radius:50%; width:42px; height:42px; background:transparent; color:#500911; font-size:28px; cursor:pointer; }
+.cart-items { display:grid; gap:14px; padding:18px 0; }
+.cart-empty { padding:22px 8px; text-align:center; color:#66534C; line-height:1.7; }
+.cart-line { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid #d9c5a8; }
+.cart-line img { width:82px; height:90px; flex-shrink:0; object-fit:cover; border-radius:8px; }
+.cart-line-info { flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
+.cart-line-info strong { color:#500911; }
+.cart-line-info small { color:#66534C; }
+.cart-line-price { margin-top:2px; }
+.cart-quantity { display:flex; align-items:center; gap:12px; margin-top:4px; }
+.cart-quantity button { width:30px; height:30px; border:1px solid #B88738; border-radius:50%; background:#fffaf2; color:#500911; font-size:18px; cursor:pointer; }
+.cart-remove { border:0; padding:2px 0; background:transparent; color:#7B2626; text-decoration:underline; cursor:pointer; }
+.cart-summary { display:grid; grid-template-columns:1fr auto; gap:8px; padding:16px 0; border-top:1px solid #B88738; }
+.cart-summary strong { color:#500911; font-size:22px; }
+.cart-summary small { grid-column:1/-1; color:#66534C; line-height:1.6; }
+.cart-checkout { display:grid; gap:9px; padding-top:12px; }
+.cart-checkout h3 { margin:4px 0 8px; color:#500911; }
+.cart-checkout label { margin-top:4px; font-size:13px; font-weight:700; }
+.cart-checkout input, .cart-checkout textarea {
+  width:100%; box-sizing:border-box; padding:12px; border:1px solid #c8b18e;
+  border-radius:8px; background:#fffaf2; color:#1F1F1F; font:inherit;
+}
+.cart-checkout input:focus, .cart-checkout textarea:focus { outline:2px solid #B88738; outline-offset:1px; }
+.cart-submit {
+  margin-top:10px; width:100%; padding:15px 12px; border:1px solid #B88738;
+  border-radius:8px; background:#500911; color:#F0E3D2; font:inherit;
+  font-weight:800; letter-spacing:.04em; cursor:pointer;
+}
+.cart-submit:disabled { opacity:.5; cursor:not-allowed; }
+.cart-privacy { margin:0 0 8px; color:#66534C; font-size:12px; line-height:1.6; }
+@media(max-width:600px) {
+  .cart-drawer { padding:18px; }
+  header { gap:10px; }
+  .cart-trigger { padding:8px 10px; font-size:12px; }
+}
+@media(prefers-reduced-motion:reduce) { .cart-drawer { transition:none; } }
+</style>
+
+
+<style id="phone-header-mobile-v2-css">
+/* Desktop: garder la présentation d'origine */
+.phone-v2-toggle { display: none; }
+
+@media (max-width: 760px) {
+  header.phone-header-v2 {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    background: #500911;
+  }
+
+  header.phone-header-v2 > .phone-v2-toggle {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border: 1px solid #B88738;
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .phone-v2-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #F0E3D2;
+  }
+
+  header.phone-header-v2 > .brand {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    min-width: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-size: clamp(12px, 3.6vw, 16px);
+  }
+
+  header.phone-header-v2 > .brand small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  header.phone-header-v2 > #cartOpen {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    box-sizing: border-box;
+    width: 38px;
+    min-width: 38px;
+    height: 36px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  header.phone-header-v2 > #cartOpen .cart-open-label {
+    display: none;
+  }
+
+  header.phone-header-v2 > #cartOpen .cart-open-icon {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+  }
+
+  header.phone-header-v2 > #cartOpen .cart-count {
+    position: absolute;
+    top: -6px;
+    right: -5px;
+  }
+
+  header.phone-header-v2 > .phone-v2-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 18px 18px;
+    background: #500911;
+    border-top: 1px solid rgba(184,135,56,.45);
+    box-shadow: 0 8px 16px rgba(0,0,0,.18);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    font-size: 13px;
+  }
+
+  header.phone-header-v2.menu-open > .phone-v2-menu {
+    display: flex;
+  }
+
+  header.phone-header-v2 > .phone-v2-menu > a {
+    display: block;
+    padding: 13px 4px;
+    color: #F0E3D2;
+    border-bottom: 1px solid rgba(240,227,210,.12);
+  }
+
+  header.phone-header-v2 > .phone-v2-menu > #languageBtn {
+    align-self: flex-start;
+    margin-top: 12px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -471,18 +1133,34 @@
     L'ÉLÉGANCE DE LA TRADITION MAROCAINE
   </div>
 
-  <header>
-    <a class="brand" href="#">
+  <header id="phone-header-mobile-v2" class="phone-header-v2">
+  <button class="phone-v2-toggle" id="phoneV2Toggle" type="button"
+    aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="phoneV2Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="#">
       LA MAISON SULTANA
       <small>MINI PASTILLAS</small>
     </a>
-
-    <nav>
-      <a href="#packs" data-fr="Nos Packs" data-ar="العروض">Nos Packs</a>
+  <button id="cartOpen" class="cart-open" type="button"
+  aria-label="Ouvrir le panier" aria-controls="cartDrawer">
+  <svg class="cart-open-icon" viewBox="0 0 24 24" aria-hidden="true"
+       fill="none" stroke="currentColor" stroke-width="1.7"
+       stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="21" r="1"></circle>
+    <circle cx="19" cy="21" r="1"></circle>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+  </svg>
+  <span class="cart-open-label" data-fr="Panier" data-ar="السلة">Panier</span>
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+  <nav id="phoneV2Menu" class="phone-v2-menu">
+    <a href="#packs" data-fr="Nos Packs" data-ar="العروض">Nos Packs</a>
       <a href="#contact" data-fr="Contact" data-ar="تواصل معنا">Contact</a>
-      <button class="language" id="languageBtn" type="button">العربية</button>
-    </nav>
-  </header>
+      
+<button class="language" id="languageBtn" type="button">العربية</button>
+  </nav>
+</header>
 
   <main>
     <section class="hero">
@@ -523,68 +1201,146 @@
     </section>
 
     <section class="packs">
-      <article class="pack">
-        <div class="pack-label" data-fr="L'essentiel" data-ar="العرض الأساسي">
-          L'essentiel
-        </div>
-        <div class="pack-body">
-          <div class="pack-number">01</div>
-          <h3 data-fr="Pack Découverte" data-ar="باك الاكتشاف">Pack Découverte</h3>
-          <p class="pack-description"
-             data-fr="Pour découvrir le plaisir de nos mini pastillas."
-             data-ar="باش تكتاشفوا مذاق البسطيلات ديالنا.">
-            Pour découvrir le plaisir de nos mini pastillas.
-          </p>
-          <div class="price">30 <span>DH</span></div>
-          <button class="button order-btn" data-pack="Pack Découverte" data-price="30"
-                  data-ar-pack="باك الاكتشاف"
-                  data-fr="COMMANDER CE PACK" data-ar="اطلبوا هذا العرض">
-            COMMANDER CE PACK
-          </button>
-        </div>
-      </article>
-
       <article class="pack featured">
-        <div class="pack-label" data-fr="Le préféré" data-ar="العرض المفضل">
-          Le préféré
-        </div>
-        <div class="pack-body">
-          <div class="pack-number">02</div>
-          <h3 data-fr="Pack Sultana" data-ar="باك سلطانة">Pack Sultana</h3>
-          <p class="pack-description"
-             data-fr="Un format généreux pour vos moments à partager."
-             data-ar="اختيار مثالي باش تتقاسمو اللذة مع الأحباب.">
-            Un format généreux pour vos moments à partager.
-          </p>
-          <div class="price">45 <span>DH</span></div>
-          <button class="button order-btn" data-pack="Pack Sultana" data-price="45"
-                  data-ar-pack="باك سلطانة"
-                  data-fr="COMMANDER CE PACK" data-ar="اطلبوا هذا العرض">
-            COMMANDER CE PACK
-          </button>
+        <img class="pack-image" src="images/packs/decouverte.jpg" alt="Pack Découverte" loading="lazy">
+<div class="pack-body">
+          <h3 data-fr="Pack Découverte" data-ar="باك الاكتشاف">Pack Découverte</h3>
+          <p class="pack-description" data-fr="Découvrez nos cinq spécialités en un seul assortiment." data-ar="اكتشفوا خمس نكهات مميزة في تشكيلة واحدة.">Découvrez nos cinq spécialités en un seul assortiment.</p>
+          <p class="pack-quantity" data-fr="15 pièces" data-ar="15 حبة">15 pièces</p>
+          <div class="prep-options">
+            <label>
+              <input type="radio" name="prep-1" value="frozen" checked>
+              <span data-fr="Surgelées" data-ar="مجمّدة">Surgelées</span>
+            </label>
+            <label>
+              <input type="radio" name="prep-1" value="ready">
+              <span data-fr="Prêtes à déguster" data-ar="جاهزة للأكل">Prêtes à déguster</span>
+            </label>
+          </div>
+          <ul class="pack-items"><li data-fr="3 × Pastillas au poisson" data-ar="3 × بسطيلات السمك">3 × Pastillas au poisson</li><li data-fr="3 × Pastillas au poulet" data-ar="3 × بسطيلات الدجاج">3 × Pastillas au poulet</li><li data-fr="3 × Briouates" data-ar="3 × بريوات">3 × Briouates</li><li data-fr="3 × Nems à la viande hachée" data-ar="3 × نيمس باللحم المفروم">3 × Nems à la viande hachée</li><li data-fr="3 × Nems asiatiques" data-ar="3 × نيمس آسيوية">3 × Nems asiatiques</li></ul><div class="price"><span class="pack-price" data-frozen="199" data-ready="199">199</span> <span>DH</span></div>
+          <button class="button order-btn"
+                  data-pack="Pack Découverte"
+                  data-ar-pack="باك الاكتشاف"
+                  data-price-frozen="199"
+                  data-price-ready="199"
+                  data-quantity="6"
+                  data-fr="COMMANDER CE PACK"
+                  data-ar="اطلبوا هذا العرض">COMMANDER CE PACK</button>
         </div>
       </article>
+      <article class="pack featured">
+        <img class="pack-image" src="images/packs/assortiment.jpg" alt="Le Grand Assortiment" loading="lazy">
 
-      <article class="pack">
-        <div class="pack-label" data-fr="Le généreux" data-ar="العرض الكبير">
-          Le généreux
-        </div>
         <div class="pack-body">
-          <div class="pack-number">03</div>
-          <h3 data-fr="Pack Prestige" data-ar="باك بريستيج">Pack Prestige</h3>
-          <p class="pack-description"
-             data-fr="Pour recevoir vos invités avec élégance."
-             data-ar="باش تستقبلوا ضيافكم بلمسة من الأناقة.">
-            Pour recevoir vos invités avec élégance.
-          </p>
-          <div class="price">60 <span>DH</span></div>
-          <button class="button order-btn" data-pack="Pack Prestige" data-price="60"
-                  data-ar-pack="باك بريستيج"
-                  data-fr="COMMANDER CE PACK" data-ar="اطلبوا هذا العرض">
-            COMMANDER CE PACK
-          </button>
+          <h3 data-fr="Pack Sultana" data-ar="باك سلطانة">Pack Sultana</h3>
+          <p class="pack-description" data-fr="Cinq spécialités, six pièces de chaque." data-ar="خمس نكهات، ست حبات من كل نوع.">Cinq spécialités, six pièces de chaque.</p>
+          <p class="pack-quantity" data-fr="30 pièces" data-ar="30 حبة">30 pièces</p>
+          <div class="prep-options">
+            <label>
+              <input type="radio" name="prep-2" value="frozen" checked>
+              <span data-fr="Surgelées" data-ar="مجمّدة">Surgelées</span>
+            </label>
+            <label>
+              <input type="radio" name="prep-2" value="ready">
+              <span data-fr="Prêtes à déguster" data-ar="جاهزة للأكل">Prêtes à déguster</span>
+            </label>
+          </div>
+          <ul class="pack-items"><li data-fr="6 × Pastillas au poisson" data-ar="6 × بسطيلات السمك">6 × Pastillas au poisson</li><li data-fr="6 × Pastillas au poulet" data-ar="6 × بسطيلات الدجاج">6 × Pastillas au poulet</li><li data-fr="6 × Briouates" data-ar="6 × بريوات">6 × Briouates</li><li data-fr="6 × Nems à la viande hachée" data-ar="6 × نيمس باللحم المفروم">6 × Nems à la viande hachée</li><li data-fr="6 × Nems asiatiques" data-ar="6 × نيمس آسيوية">6 × Nems asiatiques</li></ul><div class="price"><span class="pack-price" data-frozen="360" data-ready="360">360</span> <span>DH</span></div>
+          <button class="button order-btn"
+                  data-pack="Pack Sultana"
+                  data-ar-pack="باك سلطانة"
+                  data-price-frozen="360"
+                  data-price-ready="360"
+                  data-quantity="10"
+                  data-fr="COMMANDER CE PACK"
+                  data-ar="اطلبوا هذا العرض">COMMANDER CE PACK</button>
         </div>
       </article>
+      <article class="pack featured">
+        <img class="pack-image" src="images/packs/duo-pastilla.jpg" alt="Duo Pastilla" loading="lazy">
+
+        <div class="pack-body">
+          <h3 data-fr="Duo Pastilla" data-ar="دوي البسطيلات">Duo Pastilla</h3>
+          <p class="pack-description" data-fr="Pastillas au poulet et au poisson, à partager." data-ar="بسطيلات الدجاج والسمك للمشاركة.">Pastillas au poulet et au poisson, à partager.</p>
+          <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
+          <div class="prep-options">
+            <label>
+              <input type="radio" name="prep-3" value="frozen" checked>
+              <span data-fr="Surgelées" data-ar="مجمّدة">Surgelées</span>
+            </label>
+            <label>
+              <input type="radio" name="prep-3" value="ready">
+              <span data-fr="Prêtes à déguster" data-ar="جاهزة للأكل">Prêtes à déguster</span>
+            </label>
+          </div>
+          <ul class="pack-items"><li data-fr="6 × Pastillas au poulet" data-ar="6 × بسطيلات الدجاج">6 × Pastillas au poulet</li><li data-fr="6 × Pastillas au poisson" data-ar="6 × بسطيلات السمك">6 × Pastillas au poisson</li></ul><div class="price"><span class="pack-price" data-frozen="175" data-ready="175">175</span> <span>DH</span></div>
+          <button class="button order-btn"
+                  data-pack="Duo Pastilla"
+                  data-ar-pack="باك بريستيج"
+                  data-price-frozen="175"
+                  data-price-ready="175"
+                  data-quantity="15"
+                  data-fr="COMMANDER CE PACK"
+                  data-ar="اطلبوا هذا العرض">COMMANDER CE PACK</button>
+        </div>
+      </article>
+      <article class="pack featured">
+        <img class="pack-image" src="images/packs/poulet-briouates.jpg" alt="Poulet & Briouates" loading="lazy">
+
+        <div class="pack-body">
+          <h3 data-fr="Poulet & Briouates" data-ar="الدجاج والبريوات">Poulet & Briouates</h3>
+          <p class="pack-description" data-fr="Un duo savoureux aux inspirations marocaines." data-ar="مزيج لذيذ بنكهات مغربية.">Un duo savoureux aux inspirations marocaines.</p>
+          <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
+          <div class="prep-options">
+            <label>
+              <input type="radio" name="prep-4" value="frozen" checked>
+              <span data-fr="Surgelées" data-ar="مجمّدة">Surgelées</span>
+            </label>
+            <label>
+              <input type="radio" name="prep-4" value="ready">
+              <span data-fr="Prêtes à déguster" data-ar="جاهزة للأكل">Prêtes à déguster</span>
+            </label>
+          </div>
+          <ul class="pack-items"><li data-fr="6 × Pastillas au poulet" data-ar="6 × بسطيلات الدجاج">6 × Pastillas au poulet</li><li data-fr="6 × Briouates" data-ar="6 × بريوات">6 × Briouates</li></ul><div class="price"><span class="pack-price" data-frozen="150" data-ready="150">150</span> <span>DH</span></div>
+          <button class="button order-btn"
+                  data-pack="Poulet & Briouates"
+                  data-ar-pack="باك سيغنتشر"
+                  data-price-frozen="150"
+                  data-price-ready="150"
+                  data-quantity="20"
+                  data-fr="COMMANDER CE PACK"
+                  data-ar="اطلبوا هذا العرض">COMMANDER CE PACK</button>
+        </div>
+      </article>
+      <article class="pack featured">
+        <img class="pack-image" src="images/packs/saveurs-marines.jpg" alt="Saveurs Marines" loading="lazy">
+
+        <div class="pack-body">
+          <h3 data-fr="Saveurs Marines" data-ar="نكهات بحرية">Saveurs Marines</h3>
+          <p class="pack-description" data-fr="Pastillas au poisson et nems asiatiques." data-ar="بسطيلات السمك والنيمس الآسيوية.">Pastillas au poisson et nems asiatiques.</p>
+          <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
+          <div class="prep-options">
+            <label>
+              <input type="radio" name="prep-5" value="frozen" checked>
+              <span data-fr="Surgelées" data-ar="مجمّدة">Surgelées</span>
+            </label>
+            <label>
+              <input type="radio" name="prep-5" value="ready">
+              <span data-fr="Prêtes à déguster" data-ar="جاهزة للأكل">Prêtes à déguster</span>
+            </label>
+          </div>
+          <ul class="pack-items"><li data-fr="6 × Pastillas au poisson" data-ar="6 × بسطيلات السمك">6 × Pastillas au poisson</li><li data-fr="6 × Nems asiatiques" data-ar="6 × نيمس آسيوية">6 × Nems asiatiques</li></ul><div class="price"><span class="pack-price" data-frozen="175" data-ready="175">175</span> <span>DH</span></div>
+          <button class="button order-btn"
+                  data-pack="Saveurs Marines"
+                  data-ar-pack="نكهات بحرية"
+                  data-price-frozen="175"
+                  data-price-ready="175"
+                  data-quantity="25"
+                  data-fr="COMMANDER CE PACK"
+                  data-ar="اطلبوا هذا العرض">COMMANDER CE PACK</button>
+        </div>
+      </article>
+      
     </section>
 
     <p class="note" data-fr="Les détails et le contenu de chaque pack sont à confirmer lors de la commande."
@@ -605,7 +1361,7 @@
         Contactez-nous directement sur WhatsApp pour commander.
       </p>
 
-      <a class="button" id="generalOrder" href="https://wa.me/212675431957"
+      <a class="button" id="generalOrder" href="https://wa.me/212776154988"
          target="_blank" rel="noopener noreferrer"
          data-fr="NOUS CONTACTER SUR WHATSAPP"
          data-ar="تواصلوا معنا عبر واتساب">
@@ -623,7 +1379,7 @@
     <div class="socials">
       <a href="https://www.instagram.com/maisonsultana212/"
          target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-      <a href="https://wa.me/212675431957"
+      <a href="https://wa.me/212776154988"
          target="_blank" rel="noopener noreferrer">WHATSAPP</a>
     </div>
 
@@ -632,59 +1388,408 @@
     </div>
   </footer>
 
-  <script>
-    const whatsappNumber = "212675431957";
+  
+  <div class="cart-overlay" id="cartOverlay" hidden></div>
+  <aside class="cart-drawer" id="sultana-cart-drawer"
+         role="dialog" aria-modal="true" aria-labelledby="cartTitle"
+         aria-hidden="true">
+    <div class="cart-head">
+      <div>
+        <p class="cart-kicker" data-fr="LA MAISON SULTANA" data-ar="لا ميزون سلطانة">LA MAISON SULTANA</p>
+        <h2 id="cartTitle" data-fr="Votre panier" data-ar="سلّة التسوق">Votre panier</h2>
+      </div>
+      <button type="button" class="cart-close" id="cartClose"
+              aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems" aria-live="polite"></div>
+
+    <div class="cart-summary">
+      <span data-fr="Total de la commande" data-ar="المجموع الإجمالي">Total de la commande</span>
+      <strong id="cartTotal">0 DH</strong>
+      <small data-fr="Les frais de livraison seront confirmés avec vous."
+             data-ar="سيتم تأكيد مصاريف التوصيل معكم.">
+        Les frais de livraison seront confirmés avec vous.
+      </small>
+    </div>
+
+    <div id="cartCheckout" class="cart-checkout">
+      <h3 data-fr="Prêt à commander ?" data-ar="واش واجد تطلب؟">Prêt à commander ?</h3>
+      <p data-fr="Vos coordonnées seront demandées à l'étape suivante."
+         data-ar="غادي نطلبو معلومات التوصيل فالمرحلة التالية.">
+        Vos coordonnées seront demandées à l'étape suivante.
+      </p>
+      <button type="button" class="cart-submit" id="continueToCheckout"
+              data-fr="CONTINUER LA COMMANDE"
+              data-ar="متابعة الطلب">CONTINUER LA COMMANDE</button>
+      <p class="cart-privacy"
+         data-fr="Vous pourrez vérifier votre panier avant de confirmer sur WhatsApp."
+         data-ar="تقدر تراجع السلة قبل تأكيد الطلب عبر واتساب.">
+        Vous pourrez vérifier votre panier avant de confirmer sur WhatsApp.
+      </p>
+    </div>
+  </aside>
+
+
+<script>
     let currentLanguage = "fr";
+    const cart = [];
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    const cartDrawer = document.getElementById("sultana-cart-drawer");
+    const cartOverlay = document.getElementById("cartOverlay");
+    const cartItemsElement = document.getElementById("cartItems");
+    const cartCountElement = document.getElementById("cartCount");
+    const cartTotalElement = document.getElementById("cartTotal");
+
+    const labels = {
+      fr: {
+        empty: "Votre panier est vide. Ajoutez un pack pour commencer.",
+        frozen: "Surgelées",
+        ready: "Prêtes à déguster",
+        remove: "Supprimer",
+        subtotal: "Total",
+        add: "AJOUTER AU PANIER",
+        added: "Ajouté au panier",
+        noItems: "Ajoutez au moins un pack avant de commander.",
+        checkoutError: "Impossible d'ouvrir WhatsApp. Réessayez ou contactez-nous directement.",
+        order: "COMMANDE LA MAISON SULTANA",
+        customer: "Client",
+        phone: "Téléphone",
+        address: "Adresse de livraison",
+        notes: "Remarques",
+        item: "Article",
+        preparation: "Préparation",
+        quantity: "Quantité",
+        unitPrice: "Prix unitaire",
+        lineTotal: "Total de la ligne",
+        total: "TOTAL DE LA COMMANDE",
+        currency: "DH"
+      },
+      ar: {
+        empty: "سلّتكم فارغة. أضيفوا عرضاً للبدء.",
+        frozen: "مجمّدة",
+        ready: "جاهزة للأكل",
+        remove: "حذف",
+        subtotal: "المجموع",
+        add: "أضف إلى السلة",
+        added: "تمت الإضافة إلى السلة",
+        noItems: "أضيفوا عرضاً واحداً على الأقل قبل تأكيد الطلب.",
+        checkoutError: "تعذر فتح واتساب. حاولوا مجدداً أو تواصلوا معنا مباشرة.",
+        order: "طلب جديد - لا ميزون سلطانة",
+        customer: "الزبون",
+        phone: "الهاتف",
+        address: "عنوان التوصيل",
+        notes: "ملاحظات",
+        item: "المنتج",
+        preparation: "طريقة التحضير",
+        quantity: "الكمية",
+        unitPrice: "ثمن الوحدة",
+        lineTotal: "مجموع المنتج",
+        total: "المجموع الإجمالي للطلب",
+        currency: "درهم"
+      }
+    };
+
     function setLanguage(language) {
       currentLanguage = language;
-
       document.documentElement.lang = language;
       document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
 
       document.querySelectorAll("[data-fr][data-ar]").forEach(element => {
         const value = element.dataset[language];
-        if (value !== undefined) {
-          element.innerHTML = value;
-        }
-      });
-
-      document.querySelectorAll(".order-btn").forEach(button => {
-        button.textContent = button.dataset[language];
+        if (value !== undefined) element.innerHTML = value;
       });
 
       document.getElementById("languageBtn").textContent =
         language === "fr" ? "العربية" : "Français";
+
+      document.querySelectorAll("[data-fr-placeholder][data-ar-placeholder]").forEach(element => {
+        element.placeholder = element.dataset[language + "Placeholder"] || "";
+      });
+
+      renderCart();
     }
+
+    function updatePackPrice(button) {
+      const card = button.closest(".pack");
+      const selected = card.querySelector('input[type="radio"]:checked');
+      const choice = selected ? selected.value : "frozen";
+      const basePrice = Number(button.dataset.priceFrozen);
+      const displayPrice = choice === "ready"
+        ? basePrice + 20
+        : basePrice;
+
+      card.querySelector(".pack-price").textContent = displayPrice;
+      return { choice, price: basePrice };
+    }
+
+    function money(value) {
+      return Number(value).toLocaleString(
+        currentLanguage === "ar" ? "ar-MA" : "fr-FR"
+      ) + " " + labels[currentLanguage].currency;
+    }
+
+    function openCart() {
+      cartOverlay.hidden = false;
+      cartDrawer.classList.add("is-open");
+      cartDrawer.setAttribute("aria-hidden", "false");
+      document.body.classList.add("cart-is-open");
+      document.getElementById("cartClose").focus();
+    }
+
+    function closeCart() {
+      const savedScrollX = window.scrollX;
+      const savedScrollY = window.scrollY;
+
+      cartDrawer.classList.remove("is-open");
+      cartDrawer.setAttribute("aria-hidden", "true");
+      cartOverlay.hidden = true;
+      document.body.classList.remove("cart-is-open");
+
+      // Restore the page position after closing the cart.
+      window.requestAnimationFrame(() => {
+        window.scrollTo(savedScrollX, savedScrollY);
+      });
+
+      // Avoid focus automatically scrolling the page to the cart button.
+      document.getElementById("cartOpen").focus({ preventScroll: true });
+    }
+
+    function addToCart(button) {
+      const card = button.closest(".pack");
+      const { choice, price } = updatePackPrice(button);
+      const name = button.dataset.pack;
+      const arabicName = button.dataset.arPack || name;
+      const image = card.querySelector(".pack-image")?.getAttribute("src") || "";
+      const pieces = card.querySelector(".pack-quantity")?.textContent.trim() || "";
+      const key = name + "|" + choice;
+      const existing = cart.find(item => item.key === key);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          key, name, arabicName, image, pieces, choice,
+          price: Number(price), quantity: 1
+        });
+      }
+
+      renderCart();
+      openCart();
+    }
+
+    function renderCart() {
+      const t = labels[currentLanguage];
+      cartItemsElement.replaceChildren();
+
+      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const preparationFee = cart.some(item => item.choice === "ready") ? 20 : 0;
+      const total = subtotal + preparationFee;
+      cartCountElement.textContent = totalQuantity;
+      cartTotalElement.textContent = money(total);
+
+      if (!cart.length) {
+        const empty = document.createElement("p");
+        empty.className = "cart-empty";
+        empty.textContent = t.empty;
+        cartItemsElement.appendChild(empty);
+        document.getElementById("continueToCheckout").disabled = true;
+        return;
+      }
+
+      document.getElementById("continueToCheckout").disabled = false;
+
+      cart.forEach(item => {
+        const row = document.createElement("article");
+        row.className = "cart-line";
+
+        if (item.image) {
+          const image = document.createElement("img");
+          image.src = item.image;
+          image.alt = currentLanguage === "ar" ? item.arabicName : item.name;
+          row.appendChild(image);
+        }
+
+        const info = document.createElement("div");
+        info.className = "cart-line-info";
+
+        const title = document.createElement("strong");
+        title.textContent = currentLanguage === "ar" ? item.arabicName : item.name;
+        info.appendChild(title);
+
+        const prep = document.createElement("small");
+        prep.textContent = t.preparation + ": " + t[item.choice === "ready" ? "ready" : "frozen"];
+        info.appendChild(prep);
+
+        const pieceInfo = document.createElement("small");
+        pieceInfo.textContent = item.pieces;
+        info.appendChild(pieceInfo);
+
+        const linePrice = document.createElement("strong");
+        linePrice.className = "cart-line-price";
+        linePrice.textContent = money(item.price * item.quantity);
+        info.appendChild(linePrice);
+
+        const controls = document.createElement("div");
+        controls.className = "cart-quantity";
+
+        const minus = document.createElement("button");
+        minus.type = "button";
+        minus.textContent = "−";
+        minus.setAttribute("aria-label", "Decrease quantity");
+        minus.addEventListener("click", () => {
+          if (item.quantity > 1) item.quantity -= 1;
+          else cart.splice(cart.indexOf(item), 1);
+          renderCart();
+        });
+
+        const qty = document.createElement("span");
+        qty.textContent = item.quantity;
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.setAttribute("aria-label", "Increase quantity");
+        plus.addEventListener("click", () => {
+          item.quantity += 1;
+          renderCart();
+        });
+
+        controls.append(minus, qty, plus);
+        info.appendChild(controls);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "cart-remove";
+        remove.textContent = t.remove;
+        remove.addEventListener("click", () => {
+          cart.splice(cart.indexOf(item), 1);
+          renderCart();
+        });
+        info.appendChild(remove);
+
+        row.appendChild(info);
+        cartItemsElement.appendChild(row);
+      });
+    }
+
+    document.getElementById("cartOpen").addEventListener("click", openCart);
+    document.getElementById("cartClose").addEventListener("click", closeCart);
+    cartOverlay.addEventListener("click", closeCart);
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && cartDrawer.classList.contains("is-open")) closeCart();
+    });
 
     document.getElementById("languageBtn").addEventListener("click", () => {
       setLanguage(currentLanguage === "fr" ? "ar" : "fr");
     });
 
-    document.querySelectorAll(".order-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        const pack = currentLanguage === "ar"
-          ? button.dataset.arPack
-          : button.dataset.pack;
+    document.querySelectorAll(".pack").forEach(card => {
+      const button = card.querySelector(".order-btn");
 
-        const price = button.dataset.price;
-
-        const message = currentLanguage === "ar"
-          ? `السلام عليكم، بغيت نطلب ${pack} بثمن ${price} درهم. المرجو تأكيد الطلب والتفاصيل.`
-          : `Bonjour, je souhaite commander le ${pack} à ${price} DH. Merci de me confirmer les détails.`;
-
-        window.open(
-          `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
-          "_blank",
-          "noopener,noreferrer"
-        );
+      card.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener("change", () => updatePackPrice(button));
       });
+
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        addToCart(button);
+      });
+    });
+
+    document.getElementById("continueToCheckout").addEventListener("click", () => {
+      if (!cart.length) {
+        alert(labels[currentLanguage].noItems);
+        return;
+      }
+
+      try {
+        sessionStorage.setItem("maisonSultanaCartV1", JSON.stringify(cart));
+        sessionStorage.setItem("maisonSultanaLanguageV1", currentLanguage);
+        window.location.href = "commande.html";
+      } catch (error) {
+        alert("Impossible de préparer la commande. Réessayez.");
+      }
     });
 
     setLanguage("fr");
   </script>
+
+
+
+
+
+
+<style id="cart-frame-override">
+/* Add a gold frame to the cart button */
+#cartOpen.cart-open {
+  border: 1px solid #B88738 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+</style>
+
+
+
+<style id="panier-text-black">
+#cartOpen.cart-open .cart-open-label,
+#cartOpen.cart-open .cart-open-icon {
+  color: #1F1F1F !important;
+}
+#cartOpen.cart-open .cart-open-icon {
+  stroke: #1F1F1F !important;
+}
+</style>
+
+<style id="panier-hover-gold">
+#cartOpen.cart-open .cart-open-label,
+#cartOpen.cart-open .cart-open-icon {
+  color: #1F1F1F !important;
+  transition: color .2s ease;
+}
+#cartOpen.cart-open .cart-open-icon {
+  stroke: #1F1F1F !important;
+  transition: stroke .2s ease;
+}
+#cartOpen.cart-open:hover .cart-open-label,
+#cartOpen.cart-open:hover .cart-open-icon {
+  color: #B88738 !important;
+}
+#cartOpen.cart-open:hover .cart-open-icon {
+  stroke: #B88738 !important;
+}
+</style>
+
+
+<script id="phone-header-mobile-v2-js">
+(() => {
+  const header = document.getElementById('phone-header-mobile-v2');
+  const toggle = document.getElementById('phoneV2Toggle');
+  const menu = document.getElementById('phoneV2Menu');
+  if (!header || !toggle || !menu || toggle.dataset.bound === 'true') return;
+  toggle.dataset.bound = 'true';
+
+  function closeMenu() {
+    header.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', () => {
+    const open = !header.classList.contains('menu-open');
+    header.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760) closeMenu();
+  });
+})();
+</script>
 </body>
 </html>
 
