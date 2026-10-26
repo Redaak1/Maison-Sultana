@@ -386,8 +386,7 @@ input:focus, textarea:focus, select:focus {
           button.setAttribute("role", "option");
           button.textContent = result.display_name;
           button.addEventListener("click", () => {
-            addressInput.value = result.display_name;
-            searchInput.value = result.display_name;
+                    searchInput.value = result.display_name;
             suggestions.replaceChildren();
             selectCoordinates(Number(result.lat), Number(result.lon), false);
           });
