@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#500911">
+  <meta name="description" content="La Maison Sultana — Mini pastillas marocaines, élégance et tradition.">
+  <title>La Maison Sultana | Mini Pastillas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --burgundy: #500911;
+      --gold: #B88738;
+      --cream: #F0E3D2;
+      --black: #1F1F1F;
+      --paper: #FAF5EE;
+      --muted: #76665B;
+      --white: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--black);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, select {
+      font: inherit;
+    }
+
+    .topbar {
+      background: var(--burgundy);
+      color: var(--cream);
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid rgba(80, 9, 17, .12);
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--burgundy);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(19px, 3vw, 29px);
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--gold);
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 12px;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .language {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--burgundy);
+      padding: 7px 11px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .hero {
+      background: var(--burgundy);
+      color: var(--cream);
+      min-height: 510px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 70px 8% 75px 12%;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(43px, 6vw, 75px);
+      line-height: 1.12;
+      margin-bottom: 23px;
+    }
+
+    .hero-copy p {
+      color: rgba(240, 227, 210, .82);
+      max-width: 420px;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      border: 1px solid var(--gold);
+      padding: 13px 23px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .button:hover {
+      background: var(--cream);
+      border-color: var(--cream);
+    }
+
+    .hero-image {
+      min-height: 510px;
+      height: 100%;
+      background:
+        linear-gradient(0deg, rgba(31,31,31,.15), rgba(31,31,31,.05)),
+        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=85')
+        center / cover no-repeat;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 80px 20px 35px;
+    }
+
+    .intro .eyebrow {
+      margin-bottom: 12px;
+    }
+
+    .intro h2 {
+      color: var(--burgundy);
+      font-size: clamp(30px, 4vw, 43px);
+      margin-bottom: 14px;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 550px;
+      margin: auto;
+      font-size: 12px;
+    }
+
+    .gold-line {
+      height: 1px;
+      width: 55px;
+      background: var(--gold);
+      margin: 23px auto;
+    }
+
+    .packs {
+      padding: 35px 7% 95px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .pack {
+      background: var(--white);
+      border: 1px solid #E5D7C7;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .pack:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(80, 9, 17, .09);
+    }
+
+    .pack.featured {
+      border: 1px solid var(--gold);
+    }
+
+    .pack-label {
+      background: var(--burgundy);
+      color: var(--cream);
+      text-align: center;
+      padding: 9px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .pack-body {
+      padding: 32px 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .pack-number {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .pack h3 {
+      color: var(--burgundy);
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .pack-description {
+      color: var(--muted);
+      font-size: 11px;
+      min-height: 48px;
+      margin-bottom: 23px;
+    }
+
+    .price {
+      color: var(--burgundy);
+      font-family: 'Playfair Display', serif;
+      font-size: 37px;
+      margin-bottom: 22px;
+    }
+
+    .price span {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pack .button {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .pack:not(.featured) .button {
+      background: transparent;
+      color: var(--burgundy);
+    }
+
+    .pack:not(.featured) .button:hover {
+      background: var(--burgundy);
+      color: var(--cream);
+    }
+
+    .note {
+      text-align: center;
+      padding: 0 20px 75px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .contact {
+      background: var(--cream);
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .contact h2 {
+      color: var(--burgundy);
+      font-size: clamp(30px, 4vw, 42px);
+      margin-bottom: 15px;
+    }
+
+    .contact p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+
+    .contact .button {
+      background: var(--burgundy);
+      color: var(--cream);
+      border-color: var(--burgundy);
+    }
+
+    .contact .button:hover {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+
+    footer {
+      background: var(--black);
+      color: var(--cream);
+      padding: 35px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer .brand {
+      color: var(--cream);
+      font-size: 22px;
+    }
+
+    footer .brand small {
+      text-align: left;
+    }
+
+    .socials {
+      display: flex;
+      gap: 20px;
+      font-size: 11px;
+    }
+
+    .socials a:hover {
+      color: var(--gold);
+    }
+
+    .copyright {
+      width: 100%;
+      border-top: 1px solid rgba(240, 227, 210, .15);
+      padding-top: 18px;
+      color: #B8A99B;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    [dir="rtl"] {
+      font-family: 'Amiri', serif;
+    }
+
+    [dir="rtl"] .hero-copy {
+      padding: 70px 12% 75px 8%;
+    }
+
+    [dir="rtl"] .eyebrow {
+      letter-spacing: 1px;
+    }
+
+    [dir="rtl"] nav {
+      font-family: 'Amiri', serif;
+      font-size: 15px;
+    }
+
+    [dir="rtl"] .pack-description,
+    [dir="rtl"] .intro p,
+    [dir="rtl"] .hero-copy p,
+    [dir="rtl"] .contact p {
+      font-size: 15px;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        padding: 17px 5%;
+        flex-wrap: wrap;
+      }
+
+      nav {
+        gap: 13px;
+        font-size: 11px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 65px 8%;
+      }
+
+      .hero-image {
+        min-height: 300px;
+        grid-row: 1;
+      }
+
+      .packs {
+        grid-template-columns: 1fr;
+        padding: 25px 7% 65px;
+        gap: 20px;
+      }
+
+      .pack-body {
+        padding: 28px;
+      }
+
+      .pack-description {
+        min-height: auto;
+      }
+
+      [dir="rtl"] .hero-copy {
+        padding: 55px 8%;
+      }
+
+      footer {
+        justify-content: center;
+        text-align: center;
+      }
+
+      footer .brand small {
+        text-align: center;
+      }
+
+      .socials {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 390px) {
+      nav {
+        gap: 9px;
+      }
+
+      .brand small {
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar" data-fr="L'ÉLÉGANCE DE LA TRADITION MAROCAINE"
+       data-ar="أناقة المذاق المغربي الأصيل">
+    L'ÉLÉGANCE DE LA TRADITION MAROCAINE
+  </div>
+
+  <header>
+    <a class="brand" href="#">
+      LA MAISON SULTANA
+      <small>MINI PASTILLAS</small>
+    </a>
+
+    <nav>
+      <a href="#packs" data-fr="Nos Packs" data-ar="العروض">Nos Packs</a>
+      <a href="#contact" data-fr="Contact" data-ar="تواصل معنا">Contact</a>
+      <button class="language" id="languageBtn" type="button">العربية</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow" data-fr="Tradition · Raffinement · Saveur"
+             data-ar="أصالة · أناقة · مذاق">Tradition · Raffinement · Saveur</div>
+
+        <h1 data-fr="Un plaisir<br>à partager."
+            data-ar="لذّة<br>تُشارك.">Un plaisir<br>à partager.</h1>
+
+        <p data-fr="Découvrez nos mini pastillas, inspirées du savoir-faire marocain et pensées pour vos plus beaux moments."
+           data-ar="اكتشفوا البسطيلات المغربية الصغيرة، بلمسة أصيلة ومذاق يليق بأجمل لحظاتكم.">
+          Découvrez nos mini pastillas, inspirées du savoir-faire marocain et pensées pour vos plus beaux moments.
+        </p>
+
+        <a class="button" href="#packs" data-fr="DÉCOUVRIR NOS PACKS"
+           data-ar="اكتشفوا عروضنا">DÉCOUVRIR NOS PACKS</a>
+      </div>
+
+      <div class="hero-image" role="img" aria-label="Ambiance culinaire"></div>
+    </section>
+
+    <section class="intro" id="packs">
+      <div class="eyebrow" data-fr="Notre sélection" data-ar="اختياراتنا">
+        Notre sélection
+      </div>
+
+      <h2 data-fr="Choisissez votre pack" data-ar="اختاروا العرض المناسب لكم">
+        Choisissez votre pack
+      </h2>
+
+      <div class="gold-line"></div>
+
+      <p data-fr="Trois formules pour vos envies et vos moments de partage."
+         data-ar="ثلاثة عروض لتناسب أذواقكم ولحظاتكم المميزة.">
+        Trois formules pour vos envies et vos moments de partage.
+      </p>
+    </section>
+
+    <section class="packs">
+      <article class="pack">
+        <div class="pack-label" data-fr="L'essentiel" data-ar="العرض الأساسي">
+          L'essentiel
+        </div>
+        <div class="pack-body">
+          <div class="pack-number">01</div>
+          <h3 data-fr="Pack Découverte" data-ar="باك الاكتشاف">Pack Découverte</h3>
+          <p class="pack-description"
+             data-fr="Pour découvrir le plaisir de nos mini pastillas."
+             data-ar="باش تكتاشفوا مذاق البسطيلات ديالنا.">
+            Pour découvrir le plaisir de nos mini pastillas.
+          </p>
+          <div class="price">30 <span>DH</span></div>
+          <button class="button order-btn" data-pack="Pack Découverte" data-price="30"
+                  data-ar-pack="باك الاكتشاف"
+                  data-fr="COMMANDER CE PACK" data-ar="اطلبوا هذا العرض">
+            COMMANDER CE PACK
+          </button>
+        </div>
+      </article>
+
+      <article class="pack featured">
+        <div class="pack-label" data-fr="Le préféré" data-ar="العرض المفضل">
+          Le préféré
+        </div>
+        <div class="pack-body">
+          <div class="pack-number">02</div>
+          <h3 data-fr="Pack Sultana" data-ar="باك سلطانة">Pack Sultana</h3>
+          <p class="pack-description"
+             data-fr="Un format généreux pour vos moments à partager."
+             data-ar="اختيار مثالي باش تتقاسمو اللذة مع الأحباب.">
+            Un format généreux pour vos moments à partager.
+          </p>
+          <div class="price">45 <span>DH</span></div>
+          <button class="button order-btn" data-pack="Pack Sultana" data-price="45"
+                  data-ar-pack="باك سلطانة"
+                  data-fr="COMMANDER CE PACK" data-ar="اطلبوا هذا العرض">
+            COMMANDER CE PACK
+          </button>
+        </div>
+      </article>
+
+      <article class="pack">
+        <div class="pack-label" data-fr="Le généreux" data-ar="العرض الكبير">
+          Le généreux
+        </div>
+        <div class="pack-body">
+          <div class="pack-number">03</div>
+          <h3 data-fr="Pack Prestige" data-ar="باك بريستيج">Pack Prestige</h3>
+          <p class="pack-description"
+             data-fr="Pour recevoir vos invités avec élégance."
+             data-ar="باش تستقبلوا ضيافكم بلمسة من الأناقة.">
+            Pour recevoir vos invités avec élégance.
+          </p>
+          <div class="price">60 <span>DH</span></div>
+          <button class="button order-btn" data-pack="Pack Prestige" data-price="60"
+                  data-ar-pack="باك بريستيج"
+                  data-fr="COMMANDER CE PACK" data-ar="اطلبوا هذا العرض">
+            COMMANDER CE PACK
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <p class="note" data-fr="Les détails et le contenu de chaque pack sont à confirmer lors de la commande."
+       data-ar="يمكنكم تأكيد محتوى كل عرض عند الطلب.">
+      Les détails et le contenu de chaque pack sont à confirmer lors de la commande.
+    </p>
+
+    <section class="contact" id="contact">
+      <div class="eyebrow" data-fr="Un moment Sultana" data-ar="لحظات سلطانة">
+        Un moment Sultana
+      </div>
+
+      <h2 data-fr="Votre commande commence ici."
+          data-ar="طلبكم يبدأ من هنا.">Votre commande commence ici.</h2>
+
+      <p data-fr="Contactez-nous directement sur WhatsApp pour commander."
+         data-ar="تواصلوا معنا مباشرة عبر واتساب لتأكيد طلبكم.">
+        Contactez-nous directement sur WhatsApp pour commander.
+      </p>
+
+      <a class="button" id="generalOrder" href="https://wa.me/212675431957"
+         target="_blank" rel="noopener noreferrer"
+         data-fr="NOUS CONTACTER SUR WHATSAPP"
+         data-ar="تواصلوا معنا عبر واتساب">
+        NOUS CONTACTER SUR WHATSAPP
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#">
+      LA MAISON SULTANA
+      <small>MINI PASTILLAS</small>
+    </a>
+
+    <div class="socials">
+      <a href="https://www.instagram.com/maisonsultana212/"
+         target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+      <a href="https://wa.me/212675431957"
+         target="_blank" rel="noopener noreferrer">WHATSAPP</a>
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span> La Maison Sultana. Tous droits réservés.
+    </div>
+  </footer>
+
+  <script>
+    const whatsappNumber = "212675431957";
+    let currentLanguage = "fr";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function setLanguage(language) {
+      currentLanguage = language;
+
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+
+      document.querySelectorAll("[data-fr][data-ar]").forEach(element => {
+        const value = element.dataset[language];
+        if (value !== undefined) {
+          element.innerHTML = value;
+        }
+      });
+
+      document.querySelectorAll(".order-btn").forEach(button => {
+        button.textContent = button.dataset[language];
+      });
+
+      document.getElementById("languageBtn").textContent =
+        language === "fr" ? "العربية" : "Français";
+    }
+
+    document.getElementById("languageBtn").addEventListener("click", () => {
+      setLanguage(currentLanguage === "fr" ? "ar" : "fr");
+    });
+
+    document.querySelectorAll(".order-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const pack = currentLanguage === "ar"
+          ? button.dataset.arPack
+          : button.dataset.pack;
+
+        const price = button.dataset.price;
+
+        const message = currentLanguage === "ar"
+          ? `السلام عليكم، بغيت نطلب ${pack} بثمن ${price} درهم. المرجو تأكيد الطلب والتفاصيل.`
+          : `Bonjour, je souhaite commander le ${pack} à ${price} DH. Merci de me confirmer les détails.`;
+
+        window.open(
+          `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+          "_blank",
+          "noopener,noreferrer"
+        );
+      });
+    });
+
+    setLanguage("fr");
+  </script>
+</body>
+</html>
+
