@@ -1125,6 +1125,33 @@ html[dir="rtl"] .cart-drawer {
   }
 }
 </style>
+
+<style id="pack-quantity-picker-style">
+.pack-quantity-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 14px 0;
+}
+.pack-quantity-picker button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #d9c8b4;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+.pack-quantity-picker output {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+</style>
+
 </head>
 
 <body>
@@ -1586,15 +1613,16 @@ html[dir="rtl"] .cart-drawer {
       const arabicName = button.dataset.arPack || name;
       const image = card.querySelector(".pack-image")?.getAttribute("src") || "";
       const pieces = card.querySelector(".pack-quantity")?.textContent.trim() || "";
+      const quantity = Math.max(1, Math.min(99, Number(button.dataset.quantity) || 1));
       const key = name + "|" + choice;
       const existing = cart.find(item => item.key === key);
 
       if (existing) {
-        existing.quantity += 1;
+        existing.quantity += quantity;
       } else {
         cart.push({
           key, name, arabicName, image, pieces, choice,
-          price: Number(price), quantity: 1
+          price: Number(price), quantity
         });
       }
 
@@ -1786,6 +1814,38 @@ html[dir="rtl"] .cart-drawer {
 
     document.querySelectorAll(".pack").forEach(card => {
       const button = card.querySelector(".order-btn");
+      if (!button) return;
+
+      const picker = document.createElement("div");
+      picker.className = "pack-quantity-picker";
+
+      const minus = document.createElement("button");
+      minus.type = "button";
+      minus.textContent = "−";
+      minus.setAttribute("aria-label", "Diminuer la quantité");
+
+      const output = document.createElement("output");
+      output.textContent = "1";
+      output.value = "1";
+      output.setAttribute("aria-live", "polite");
+
+      const plus = document.createElement("button");
+      plus.type = "button";
+      plus.textContent = "+";
+      plus.setAttribute("aria-label", "Augmenter la quantité");
+
+      minus.addEventListener("click", () => {
+        const q = Math.max(1, Number(output.textContent) - 1);
+        output.textContent = output.value = String(q);
+      });
+
+      plus.addEventListener("click", () => {
+        const q = Math.min(99, Number(output.textContent) + 1);
+        output.textContent = output.value = String(q);
+      });
+
+      picker.append(minus, output, plus);
+      button.parentNode.insertBefore(picker, button);
 
       card.querySelectorAll('input[type="radio"]').forEach(input => {
         input.addEventListener("change", () => updatePackPrice(button));
@@ -1793,7 +1853,10 @@ html[dir="rtl"] .cart-drawer {
 
       button.addEventListener("click", event => {
         event.preventDefault();
+        button.dataset.quantity = output.textContent;
         addToCart(button);
+        delete button.dataset.quantity;
+        output.textContent = output.value = "1";
       });
     });
 
