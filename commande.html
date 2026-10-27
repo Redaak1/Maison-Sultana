@@ -599,7 +599,10 @@ input:focus, textarea:focus, select:focus {
     });
 
     messageLines.push(
-      "Frais de livraison : " + money(deliveryFee),
+      "Frais de livraison : " + money(deliveryFee) +
+        " (" + Number(deliveryDistanceKm).toLocaleString("fr-FR", {
+          maximumFractionDigits: 1
+        }) + " km)",
       "Frais de préparation : " + money(preparationFee),
       "",
       "TOTAL À PAYER : " + money(orderTotal),
