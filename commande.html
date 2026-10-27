@@ -251,11 +251,31 @@ input:focus, textarea:focus, select:focus {
   }
 
   if (!Array.isArray(orderCart)) orderCart = [];
-  orderCart = orderCart.filter(item =>
-    item && typeof item.name === "string" &&
-    Number(item.price) >= 0 && Number(item.quantity) > 0 &&
-    (item.choice === "ready" || item.choice === "frozen")
-  );
+
+  // Prix officiels synchronisés avec les packs de index.html.
+  const officialPrices = {
+    "Pack Découverte": 199,
+    "Pack Sultana": 360,
+    "Duo Pastilla": 175,
+    "Poulet & Briouates": 150,
+    "Saveurs Marines": 175
+  };
+
+  orderCart = orderCart
+    .filter(item =>
+      item &&
+      typeof item.name === "string" &&
+      Object.prototype.hasOwnProperty.call(officialPrices, item.name) &&
+      Number.isFinite(Number(item.quantity)) &&
+      Number(item.quantity) > 0 &&
+      Number.isInteger(Number(item.quantity)) &&
+      (item.choice === "ready" || item.choice === "frozen")
+    )
+    .map(item => ({
+      ...item,
+      price: officialPrices[item.name],
+      quantity: Number(item.quantity)
+    }));
 
   const cartItemsContainer = document.getElementById("orderCartItems");
   const orderTotalElement = document.getElementById("orderTotal");
