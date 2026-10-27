@@ -1600,6 +1600,61 @@ html[dir="rtl"] .cart-drawer {
       }
 
       renderCart();
+      showCartToast();
+    }
+
+    let cartToastTimer;
+
+    function showCartToast() {
+      let toast = document.getElementById("cartAddedToast");
+
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "cartAddedToast";
+        toast.setAttribute("role", "status");
+        toast.setAttribute("aria-live", "polite");
+
+        Object.assign(toast.style, {
+          position: "fixed",
+          bottom: "24px",
+          left: "50%",
+          transform: "translate(-50%, 20px)",
+          zIndex: "10001",
+          width: "max-content",
+          maxWidth: "calc(100% - 32px)",
+          boxSizing: "border-box",
+          padding: "14px 20px",
+          border: "1px solid #B88738",
+          borderRadius: "12px",
+          background: "#F0E3D2",
+          color: "#1F1F1F",
+          boxShadow: "0 8px 30px rgba(0,0,0,.18)",
+          fontSize: "14px",
+          fontWeight: "600",
+          textAlign: "center",
+          opacity: "0",
+          visibility: "hidden",
+          transition: "opacity .25s ease, transform .25s ease, visibility .25s ease",
+          pointerEvents: "none"
+        });
+
+        document.body.appendChild(toast);
+      }
+
+      toast.textContent = currentLanguage === "ar"
+        ? "✓ تمت إضافة المنتج إلى السلة"
+        : "✓ Ajouté au panier";
+
+      toast.style.visibility = "visible";
+      toast.style.opacity = "1";
+      toast.style.transform = "translate(-50%, 0)";
+
+      clearTimeout(cartToastTimer);
+      cartToastTimer = setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translate(-50%, 20px)";
+        toast.style.visibility = "hidden";
+      }, 3000);
     }
 
     function saveCart() {
