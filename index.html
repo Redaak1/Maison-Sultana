@@ -1390,6 +1390,14 @@ html[dir="rtl"] .cart-drawer {
 
     <section class="packs nos-packs">
       <article class="pack featured">
+        <img
+          class="pack-image"
+          src="images/packs/poulet.jpg"
+          data-frozen-src="images/packs/poulet.jpg"
+          data-ready-src="images/packs/poulet1.jpg"
+          alt="Mini Pastilla Poulet Amandes"
+          loading="lazy"
+        >
         <div class="pack-body">
           <h3 data-fr="Mini Pastilla Poulet Amandes" data-ar="ميني بسطيلة بالدجاج واللوز">Mini Pastilla Poulet Amandes</h3>
 
@@ -1400,7 +1408,7 @@ html[dir="rtl"] .cart-drawer {
             </label>
             <label>
               <input type="radio" name="new-prep-1" value="ready">
-              <span data-fr="Prêtes à préparer" data-ar="جاهزة للتحضير">Prêtes à déguster</span>
+              <span data-fr="Prêtes à préparer" data-ar="جاهزة للتحضير">Prêtes à préparer</span>
             </label>
           </div>
 
@@ -1727,6 +1735,20 @@ html[dir="rtl"] .cart-drawer {
       const card = button.closest(".pack");
       const selected = card.querySelector('input[type="radio"]:checked');
       const choice = selected ? selected.value : "frozen";
+
+      const productImage = card.querySelector(
+        'img[data-frozen-src][data-ready-src]'
+      );
+      if (productImage) {
+        const nextSrc = choice === "ready"
+          ? productImage.dataset.readySrc
+          : productImage.dataset.frozenSrc;
+
+        if (productImage.getAttribute("src") !== nextSrc) {
+          productImage.setAttribute("src", nextSrc);
+        }
+      }
+
       const basePrice = Number(
         choice === "ready"
           ? button.dataset.priceReady
