@@ -1589,15 +1589,16 @@ html[dir="rtl"] .cart-drawer {
       const arabicName = button.dataset.arPack || name;
       const image = card.querySelector(".pack-image")?.getAttribute("src") || "";
       const pieces = card.querySelector(".pack-quantity")?.textContent.trim() || "";
+      const quantity = Math.max(1, Math.min(99, Number(button.dataset.quantity) || 1));
       const key = name + "|" + choice;
       const existing = cart.find(item => item.key === key);
 
       if (existing) {
-        existing.quantity += 1;
+        existing.quantity += quantity;
       } else {
         cart.push({
           key, name, arabicName, image, pieces, choice,
-          price: Number(price), quantity: 1
+          price: Number(price), quantity
         });
       }
 
@@ -1714,6 +1715,8 @@ html[dir="rtl"] .cart-drawer {
 
     document.querySelectorAll(".pack").forEach(card => {
       const button = card.querySelector(".order-btn");
+      if (!button) return;
+
       const picker = document.createElement("div");
       picker.className = "pack-quantity-picker";
 
@@ -1723,8 +1726,8 @@ html[dir="rtl"] .cart-drawer {
       minus.setAttribute("aria-label", "Diminuer la quantité");
 
       const output = document.createElement("output");
-      output.value = "1";
       output.textContent = "1";
+      output.value = "1";
       output.setAttribute("aria-live", "polite");
 
       const plus = document.createElement("button");
@@ -1733,15 +1736,13 @@ html[dir="rtl"] .cart-drawer {
       plus.setAttribute("aria-label", "Augmenter la quantité");
 
       minus.addEventListener("click", () => {
-        const quantity = Math.max(1, Number(output.textContent) - 1);
-        output.textContent = quantity;
-        output.value = String(quantity);
+        const q = Math.max(1, Number(output.textContent) - 1);
+        output.textContent = output.value = String(q);
       });
 
       plus.addEventListener("click", () => {
-        const quantity = Math.min(99, Number(output.textContent) + 1);
-        output.textContent = quantity;
-        output.value = String(quantity);
+        const q = Math.min(99, Number(output.textContent) + 1);
+        output.textContent = output.value = String(q);
       });
 
       picker.append(minus, output, plus);
@@ -1753,30 +1754,10 @@ html[dir="rtl"] .cart-drawer {
 
       button.addEventListener("click", event => {
         event.preventDefault();
-        const selectedQuantity = Number(output.textContent);
-        const originalAddToCart = addToCart;
-        const originalQuantity = button.dataset.quantity;
-        button.dataset.quantity = String(selectedQuantity);
-
-        try {
-          originalAddToCart(button);
-        } finally {
-          button.dataset.quantity = originalQuantity;
-          output.textContent = "1";
-          output.value = "1";
-        }
-      });
-    });
-
-      const button = card.querySelector(".order-btn");
-
-      card.querySelectorAll('input[type="radio"]').forEach(input => {
-        input.addEventListener("change", () => updatePackPrice(button));
-      });
-
-      button.addEventListener("click", event => {
-        event.preventDefault();
+        button.dataset.quantity = output.textContent;
         addToCart(button);
+        delete button.dataset.quantity;
+        output.textContent = output.value = "1";
       });
     });
 
