@@ -1407,8 +1407,9 @@ html[dir="rtl"] .cart-drawer {
     <div class="cart-summary">
       <span data-fr="Total de la commande" data-ar="المجموع الإجمالي">Total de la commande</span>
       <strong id="cartTotal">0 DH</strong>
-      <small data-fr="Les frais de livraison seront confirmés avec vous."
-             data-ar="سيتم تأكيد مصاريف التوصيل معكم.">
+      <small id="cartPreparationFee" hidden></small>
+      <small data-fr="Les frais de livraison seront calculés à l'étape suivante."
+             data-ar="سيتم حساب مصاريف التوصيل في المرحلة التالية.">
         Les frais de livraison seront confirmés avec vous.
       </small>
     </div>
@@ -1539,11 +1540,9 @@ html[dir="rtl"] .cart-drawer {
       const selected = card.querySelector('input[type="radio"]:checked');
       const choice = selected ? selected.value : "frozen";
       const basePrice = Number(button.dataset.priceFrozen);
-      const displayPrice = choice === "ready"
-        ? basePrice + 20
-        : basePrice;
-
-      card.querySelector(".pack-price").textContent = displayPrice;
+      // Le prix du pack reste le prix de base.
+      // Les frais de préparation sont ajoutés une seule fois par commande.
+      card.querySelector(".pack-price").textContent = basePrice;
       return { choice, price: basePrice };
     }
 
@@ -1676,6 +1675,12 @@ html[dir="rtl"] .cart-drawer {
       const total = subtotal + preparationFee;
       cartCountElement.textContent = totalQuantity;
       cartTotalElement.textContent = money(total);
+
+      const preparationFeeElement = document.getElementById("cartPreparationFee");
+      preparationFeeElement.hidden = preparationFee === 0;
+      preparationFeeElement.textContent = currentLanguage === "ar"
+        ? "رسوم التحضير: " + money(preparationFee)
+        : "Frais de préparation : " + money(preparationFee);
 
       if (!cart.length) {
         const empty = document.createElement("p");
