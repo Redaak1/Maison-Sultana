@@ -598,11 +598,15 @@ input:focus, textarea:focus, select:focus {
       );
     });
 
+    const distanceText = Number.isFinite(deliveryDistanceKm)
+      ? deliveryDistanceKm.toLocaleString("fr-FR", {
+          maximumFractionDigits: 1
+        }) + " km"
+      : "Distance indisponible";
+
     messageLines.push(
       "Frais de livraison : " + money(deliveryFee) +
-        " (" + Number(deliveryDistanceKm).toLocaleString("fr-FR", {
-          maximumFractionDigits: 1
-        }) + " km)",
+        " (" + distanceText + ")",
       "Frais de préparation : " + money(preparationFee),
       "",
       "TOTAL À PAYER : " + money(orderTotal),
