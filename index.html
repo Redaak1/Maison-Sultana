@@ -1434,6 +1434,7 @@ html[dir="rtl"] .cart-drawer {
 <script>
     let currentLanguage = "fr";
     const cart = [];
+    let ignoreCartOpenUntil = 0;
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -1558,6 +1559,7 @@ html[dir="rtl"] .cart-drawer {
     }
 
     function addToCart(button) {
+      ignoreCartOpenUntil = Date.now() + 600;
       const card = button.closest(".pack");
       const { choice, price } = updatePackPrice(button);
       const name = button.dataset.pack;
@@ -1675,7 +1677,13 @@ html[dir="rtl"] .cart-drawer {
       });
     }
 
-    document.getElementById("cartOpen").addEventListener("click", openCart);
+    document.getElementById("cartOpen").addEventListener("click", event => {
+      if (Date.now() < ignoreCartOpenUntil) {
+        event.preventDefault();
+        return;
+      }
+      openCart();
+    });
     document.getElementById("cartClose").addEventListener("click", closeCart);
     cartOverlay.addEventListener("click", closeCart);
     document.addEventListener("keydown", event => {
