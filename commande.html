@@ -572,46 +572,49 @@ input:focus, textarea:focus, select:focus {
 
     const orderTotal = subtotal + preparationFee + deliveryFee;
     const data = new FormData(this);
+
     const messageLines = [
-      "✨ LA MAISON SULTANA",
+      "✨ *LA MAISON SULTANA*",
       "━━━━━━━━━━━━━━━━━━",
-      "Bonjour, je souhaite confirmer ma commande chez La Maison Sultana.",
+      "Bonjour 👋",
+      "Je souhaite confirmer ma commande :",
       "",
-      "👤 INFORMATIONS CLIENT",
-      "Nom complet : " + data.get("customerName"),
+      "👤 *INFORMATIONS CLIENT*",
+      "Nom : " + data.get("customerName"),
       "Téléphone : " + data.get("customerPhone"),
       "",
-      "📍 LIVRAISON",
+      "📍 *LIVRAISON*",
       "Adresse : " + data.get("customerAddress"),
+      "Distance : " + deliveryDistanceKm.toFixed(1) + " km",
       "Localisation GPS : https://www.google.com/maps?q=" +
         encodeURIComponent(chosenLat + "," + chosenLon),
-      "Distance routière : " + deliveryDistanceKm.toFixed(1) + " km",
-      "Frais de livraison : " + money(deliveryFee),
       "",
-      "🛍️ DÉTAILS DE LA COMMANDE",
-      "━━━━━━━━━━━━━━━━━━"
+      "🛍️ *DÉTAILS DE LA COMMANDE*"
     ];
 
     orderCart.forEach((item, index) => {
       messageLines.push(
         "",
-        (index + 1) + ". " + item.name,
+        (index + 1) + ". *" + item.name + "*",
         "   Préparation : " + (item.choice === "ready" ? "Prêtes à déguster" : "Surgelées"),
         "   Quantité : " + item.quantity,
         "   Prix unitaire : " + money(item.price),
-        "   Total de la ligne : " + money(Number(item.price) * Number(item.quantity))
+        "   Total : " + money(Number(item.price) * Number(item.quantity))
       );
     });
 
-    if (preparationFee > 0) {
-      messageLines.push("", "Frais de préparation : " + money(preparationFee));
-    }
-
     messageLines.push(
       "",
+      "💰 *RÉCAPITULATIF*",
+      "Sous-total des produits : " + money(subtotal),
+      "Frais de préparation : " + money(preparationFee),
+      "Frais de livraison : " + money(deliveryFee),
+      "",
       "━━━━━━━━━━━━━━━━━━",
-      "💎 TOTAL DE LA COMMANDE : " + money(orderTotal),
-      "━━━━━━━━━━━━━━━━━━"
+      "💎 *TOTAL À PAYER : " + money(orderTotal) + "*",
+      "━━━━━━━━━━━━━━━━━━",
+      "",
+      "Merci de confirmer ma commande ! 🙏"
     );
 
     const notes = String(data.get("notes") || "").trim();
