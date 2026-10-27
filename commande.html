@@ -598,11 +598,16 @@ input:focus, textarea:focus, select:focus {
       );
     });
 
-    const distanceText = Number.isFinite(deliveryDistanceKm)
-      ? deliveryDistanceKm.toLocaleString("fr-FR", {
-          maximumFractionDigits: 1
-        }) + " km"
-      : "Distance indisponible";
+    const distanceMatch = deliveryDistanceElement.textContent.match(
+      /Distance routière\s*:\s*([\d.,]+)\s*km/i
+    );
+    const distanceText = distanceMatch
+      ? distanceMatch[1].replace(".", ",") + " km"
+      : Number.isFinite(deliveryDistanceKm)
+        ? deliveryDistanceKm.toLocaleString("fr-FR", {
+            maximumFractionDigits: 1
+          }) + " km"
+        : "Distance indisponible";
 
     messageLines.push(
       "Frais de livraison : " + money(deliveryFee) +
