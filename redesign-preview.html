@@ -1738,11 +1738,13 @@ html[dir="rtl"] .cart-drawer {
       minus.addEventListener("click", () => {
         const q = Math.max(1, Number(output.textContent) - 1);
         output.textContent = output.value = String(q);
+        updatePackPrice(button, q);
       });
 
       plus.addEventListener("click", () => {
         const q = Math.min(99, Number(output.textContent) + 1);
         output.textContent = output.value = String(q);
+        updatePackPrice(button, q);
       });
 
       picker.append(minus, output, plus);

@@ -1562,14 +1562,27 @@ html[dir="rtl"] .cart-drawer {
       renderCart();
     }
 
-    function updatePackPrice(button) {
+    function updatePackPrice(button, quantity) {
       const card = button.closest(".pack");
       const selected = card.querySelector('input[type="radio"]:checked');
       const choice = selected ? selected.value : "frozen";
       const basePrice = Number(button.dataset.priceFrozen);
-      // Le prix du pack reste le prix de base.
-      // Les frais de préparation sont ajoutés une seule fois par commande.
-      card.querySelector(".pack-price").textContent = basePrice;
+      const pickerOutput = card.querySelector(".pack-quantity-picker output");
+      const qty = Math.max(
+        1,
+        Math.min(
+          99,
+          Number(quantity ?? pickerOutput?.textContent ?? 1) || 1
+        )
+      );
+
+      // Display the total price for the selected pack quantity.
+      // Keep the base price for cart calculations.
+      card.querySelector(".pack-price").textContent =
+        (basePrice * qty).toLocaleString(
+          currentLanguage === "ar" ? "ar-MA" : "fr-FR"
+        );
+
       return { choice, price: basePrice };
     }
 
@@ -1837,11 +1850,13 @@ html[dir="rtl"] .cart-drawer {
       minus.addEventListener("click", () => {
         const q = Math.max(1, Number(output.textContent) - 1);
         output.textContent = output.value = String(q);
+        updatePackPrice(button, q);
       });
 
       plus.addEventListener("click", () => {
         const q = Math.min(99, Number(output.textContent) + 1);
         output.textContent = output.value = String(q);
+        updatePackPrice(button, q);
       });
 
       picker.append(minus, output, plus);
@@ -1857,6 +1872,7 @@ html[dir="rtl"] .cart-drawer {
         addToCart(button);
         delete button.dataset.quantity;
         output.textContent = output.value = "1";
+        updatePackPrice(button, 1);
       });
     });
 
