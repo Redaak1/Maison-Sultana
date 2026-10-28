@@ -1167,6 +1167,22 @@ html body section.packs {
   background-color: #FFFFFF !important;
 }
 </style>
+
+<style id="pastilla-desktop-grid">
+/* Pastilla famille: 3 products per row on desktop only */
+@media screen and (min-width: 769px) {
+  html body section.packs#pastilla-famille-produits {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  html body section.packs#pastilla-famille-produits > article.pack,
+  html body section.packs#pastilla-famille-produits > article.pack:nth-child(4),
+  html body section.packs#pastilla-famille-produits > article.pack:nth-child(5) {
+    grid-column: auto !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
