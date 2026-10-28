@@ -2209,6 +2209,64 @@ html {
 }
 </style>
 
+
+
+<style id="desktop-header-menu-logo-cart">
+@media (min-width: 761px) {
+  header.phone-header-v2 {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+  }
+
+  header.phone-header-v2 > .phone-v2-toggle {
+    display: none !important;
+  }
+
+  header.phone-header-v2 > .brand {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  header.phone-header-v2 > #cartOpen {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    margin: 0;
+  }
+
+  header.phone-header-v2 > #phoneV2Menu {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+
+  header.phone-header-v2 > #phoneV2Menu > a {
+    display: inline-block;
+    padding: 8px 0;
+    border: 0;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+</style>
+
 </head>
 
 <body>
