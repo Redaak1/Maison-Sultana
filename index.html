@@ -1734,6 +1734,439 @@ html body .hero-single-image {
 }
 </style>
 
+<style>
+
+/* First collection: clean, ordered product cards */
+@media (max-width: 768px) {
+  .packs .pack {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .packs .pack .pack-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .packs .pack .pack-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .packs .pack .pack-body h3 {
+    order: 1;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .packs .pack .pack-quantity {
+    order: 2;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+
+  .packs .pack .pack-items {
+    order: 3;
+    margin: 0;
+    padding-left: 18px;
+    line-height: 1.6;
+  }
+
+  .packs .pack .prep-options {
+    order: 4;
+    margin-top: 4px;
+  }
+
+  .packs .pack .price {
+    order: 5;
+    margin-top: auto;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .packs .pack .quantity-control,
+  .packs .pack .quantity-selector {
+    order: 6;
+  }
+
+  .packs .pack .order-btn {
+    order: 7;
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+</style>
+<style>
+
+/* Product card order for the first collection on mobile */
+@media (max-width: 768px) {
+  .packs .pack-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .packs .pack-body h3 { order: 1; }
+  .packs .pack-body .pack-quantity { order: 2; }
+  .packs .pack-body .pack-items { order: 3; }
+  .packs .pack-body .prep-options { order: 4; }
+  .packs .pack-body .price { order: 5; }
+  .packs .pack-body .pack-quantity-picker { order: 6; }
+  .packs .pack-body .order-btn {
+    order: 7;
+    width: 100%;
+  }
+
+  .packs .pack-body .pack-quantity {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .packs .pack-body .pack-items {
+    padding-left: 18px;
+    line-height: 1.55;
+  }
+
+  .packs .pack-body .pack-quantity-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 4px;
+  }
+
+  .packs .pack-body .pack-quantity-picker button {
+    min-width: 36px;
+    min-height: 36px;
+    border: 1px solid #c8a96a;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .packs .pack-body .pack-quantity-picker output {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 700;
+  }
+}
+
+</style>
+
+<style id="unified-first-collection-order">
+/* UNIFIED FIRST COLLECTION PRODUCT ORDER */
+@media (max-width: 768px) {
+  #packs + .packs > .pack {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #packs + .packs > .pack > .pack-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  #packs + .packs > .pack > .pack-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  #packs + .packs > .pack .pack-body > h3 { order: 1; margin: 0; }
+  #packs + .packs > .pack .pack-body > .pack-quantity { order: 2; margin: 0; }
+  #packs + .packs > .pack .pack-body > .pack-items { order: 3; margin: 0; padding-left: 18px; line-height: 1.6; }
+  #packs + .packs > .pack .pack-body > .pack-description { display: none; }
+  #packs + .packs > .pack .pack-body > .prep-options { order: 4; margin-top: 4px; }
+  #packs + .packs > .pack .pack-body > .price { order: 5; margin-top: auto; }
+  #packs + .packs > .pack .pack-body > .pack-quantity-picker { order: 6; }
+  #packs + .packs > .pack .pack-body > .order-btn { order: 7; width: 100%; margin-top: 8px; }
+}
+</style>
+
+
+<style id="fix-first-pack-collection-all-products">
+/* FIX-FIRST-PACK-COLLECTION-ALL-PRODUCTS */
+@media (max-width: 768px) {
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack > img.pack-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body h3 { order: 1; margin: 0; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .pack-quantity { order: 2; margin: 0; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .pack-items { order: 3; margin: 0; padding-left: 18px; line-height: 1.6; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .pack-description { display: none; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .prep-options { order: 4; margin-top: 4px; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .price { order: 5; margin-top: auto; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .pack-quantity-picker { order: 6; }
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) > article.pack .pack-body .order-btn { order: 7; width: 100%; margin-top: 8px; }
+}
+</style>
+
+
+<style id="final-description-order-fix">
+/* FINAL-DESCRIPTION-ORDER-FIX */
+
+/* First collection: hide descriptions only in the first product section */
+@media (max-width: 768px) {
+  body:has(#packs) section.packs:not(#pastilla-famille-produits) .pack-description {
+    display: none !important;
+  }
+
+  /* Pastilla Famille: title, description, then remaining details */
+  #pastilla-famille-produits .pack-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #pastilla-famille-produits .pack-body h3 {
+    order: 1 !important;
+    margin-bottom: 0 !important;
+  }
+
+  #pastilla-famille-produits .pack-body .pack-description {
+    display: block !important;
+    order: 2 !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    margin: 4px 0 8px !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+  }
+
+  #pastilla-famille-produits .pack-body .pack-quantity {
+    order: 3 !important;
+  }
+
+  #pastilla-famille-produits .pack-body .prep-options {
+    order: 4 !important;
+  }
+
+  #pastilla-famille-produits .pack-body .price {
+    order: 5 !important;
+  }
+
+  #pastilla-famille-produits .pack-body .pack-quantity-picker {
+    order: 6 !important;
+  }
+
+  #pastilla-famille-produits .pack-body .order-btn {
+    order: 7 !important;
+  }
+}
+</style>
+
+
+<style id="description-order-all-screens-v2">
+/* DESCRIPTION-ORDER-ALL-SCREENS-V2 */
+
+/* First collection only: remove the description on every screen */
+body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description {
+  display: none !important;
+}
+
+/* Pastilla Famille: title followed by a smaller description */
+#pastilla-famille-produits .pack-body {
+  display: flex;
+  flex-direction: column;
+}
+
+#pastilla-famille-produits .pack-body h3 {
+  order: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-description {
+  display: block !important;
+  order: 2 !important;
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
+  color: var(--muted) !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 4px 0 8px !important;
+  padding: 0 !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-quantity {
+  order: 3 !important;
+}
+
+#pastilla-famille-produits .pack-body .prep-options {
+  order: 4 !important;
+}
+
+#pastilla-famille-produits .pack-body .price {
+  order: 5 !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-quantity-picker {
+  order: 6 !important;
+}
+
+#pastilla-famille-produits .pack-body .order-btn {
+  order: 7 !important;
+}
+</style>
+
+
+<style id="pastilla-famille-description-under-title">
+/* PASTILLA-FAMILLE-DESCRIPTION-UNDER-EVERY-TITLE */
+#pastilla-famille-produits .pack-body {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#pastilla-famille-produits .pack-body h3 {
+  order: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-description {
+  display: block !important;
+  order: 2 !important;
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 4px 0 8px !important;
+  padding: 0 !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-quantity {
+  order: 3 !important;
+}
+</style>
+
+
+<style id="pastilla-description-fix">
+/* PASTILLA-DESCRIPTION-FIX-ACTIVE */
+
+/* First collection: remove descriptions */
+#first-pack-collection .pack-description {
+  display: none !important;
+}
+
+/* Pastilla Famille: title, small description, then other details */
+#pastilla-famille-produits .pack-body {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#pastilla-famille-produits .pack-body h3 {
+  order: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-description {
+  display: block !important;
+  order: 2 !important;
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  font-weight: 400 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 4px 0 8px !important;
+  padding: 0 !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+}
+
+#pastilla-famille-produits .pack-body .pack-quantity {
+  order: 3 !important;
+}
+</style>
+
+
+<style id="pastilla-famille-description-final">
+/* Only the Pastilla Famille product cards */
+#pastilla-famille-produits .pack-body {
+  display: flex;
+  flex-direction: column;
+}
+
+#pastilla-famille-produits .pack-body h3 {
+  order: 1 !important;
+  margin-bottom: 4px;
+}
+
+#pastilla-famille-produits .pack-body .family-description {
+  order: 2 !important;
+  display: block !important;
+  margin: 0 0 14px !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+  font-weight: 400 !important;
+  color: #777 !important;
+}
+
+#pastilla-famille-produits .pack-body .prep-options {
+  order: 3 !important;
+}
+
+#pastilla-famille-produits .pack-body .price {
+  order: 4 !important;
+}
+
+#pastilla-famille-produits .pack-body .order-btn {
+  order: 5 !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -1790,13 +2223,13 @@ html body .hero-single-image {
       </p>
     </section>
 
-    <section class="packs">
+    <section class="packs" id="first-pack-collection">
       <article class="pack featured">
         <img class="pack-image" src="images/packs/decouverte.jpg" alt="Pack Découverte" loading="lazy">
 <div class="pack-body">
           <h3 data-fr="Pack Découverte" data-ar="باك الاكتشاف">Pack Découverte</h3>
-          <p class="pack-description" data-fr="Découvrez nos cinq spécialités en un seul assortiment." data-ar="اكتشفوا خمس نكهات مميزة في تشكيلة واحدة.">Découvrez nos cinq spécialités en un seul assortiment.</p>
-          <p class="pack-quantity" data-fr="15 pièces" data-ar="15 حبة">15 pièces</p>
+          <p class="pack-quantity" data-fr="15 PIÈCES" data-ar="15 حبة">15 PIÈCES</p>
+          <ul class="pack-items"><li data-fr="3 × Pastillas au poisson" data-ar="3 × بسطيلات السمك">3 × Pastillas au poisson</li><li data-fr="3 × Pastillas au poulet" data-ar="3 × بسطيلات الدجاج">3 × Pastillas au poulet</li><li data-fr="3 × Briouates" data-ar="3 × بريوات">3 × Briouates</li><li data-fr="3 × Nems à la viande hachée" data-ar="3 × نيمس باللحم المفروم">3 × Nems à la viande hachée</li><li data-fr="3 × Nems asiatiques" data-ar="3 × نيمس آسيوية">3 × Nems asiatiques</li></ul>
           <div class="prep-options">
             <label>
               <input type="radio" name="prep-1" value="frozen" checked>
@@ -1807,7 +2240,7 @@ html body .hero-single-image {
               <span data-fr="Prêtes à déguster" data-ar="جاهزة للأكل">Prêtes à déguster</span>
             </label>
           </div>
-          <ul class="pack-items"><li data-fr="3 × Pastillas au poisson" data-ar="3 × بسطيلات السمك">3 × Pastillas au poisson</li><li data-fr="3 × Pastillas au poulet" data-ar="3 × بسطيلات الدجاج">3 × Pastillas au poulet</li><li data-fr="3 × Briouates" data-ar="3 × بريوات">3 × Briouates</li><li data-fr="3 × Nems à la viande hachée" data-ar="3 × نيمس باللحم المفروم">3 × Nems à la viande hachée</li><li data-fr="3 × Nems asiatiques" data-ar="3 × نيمس آسيوية">3 × Nems asiatiques</li></ul><div class="price"><span class="pack-price" data-frozen="199" data-ready="199">199</span> <span>DH</span></div>
+          <div class="price"><span class="pack-price" data-frozen="199" data-ready="199">199</span> <span>DH</span></div>
           <button class="button order-btn"
                   data-pack="Pack Découverte"
                   data-ar-pack="باك الاكتشاف"
@@ -2126,7 +2559,7 @@ html body .hero-single-image {
     <img class="pack-image" src="images/packs/POULET1.png" alt="Pastilla poulet amandes 3–4 personnes" loading="lazy">
     <div class="pack-body">
       <h3 data-fr="Pastilla poulet amandes" data-ar="بسطيلة الدجاج واللوز">Pastilla poulet amandes</h3>
-      <p data-fr="3–4 personnes · 25 cm" data-ar="3–4 أشخاص · 25 سم">3–4 personnes · 25 cm</p>
+      <p class="family-description" data-fr="3–4 personnes · 25 cm" data-ar="3–4 أشخاص · 25 سم">3–4 personnes · 25 cm</p>
       <div class="prep-options">
         <label><input type="radio" name="family-prep-1" value="frozen" checked><span data-fr="Surgelée" data-ar="مجمّدة">Surgelée</span></label>
         <label><input type="radio" name="family-prep-1" value="ready"><span data-fr="Prête à préparer" data-ar="جاهزة للتحضير">Prête à préparer</span></label>
@@ -2140,7 +2573,7 @@ html body .hero-single-image {
     <img class="pack-image" src="images/packs/POISSON1.png" alt="Pastilla fruits de mer 3–4 personnes" loading="lazy">
     <div class="pack-body">
       <h3 data-fr="Pastilla fruits de mer" data-ar="بسطيلة بفواكه البحر">Pastilla fruits de mer</h3>
-      <p data-fr="3–4 personnes · 25 cm" data-ar="3–4 أشخاص · 25 سم">3–4 personnes · 25 cm</p>
+      <p class="family-description" data-fr="3–4 personnes · 25 cm" data-ar="3–4 أشخاص · 25 سم">3–4 personnes · 25 cm</p>
       <div class="prep-options">
         <label><input type="radio" name="family-prep-2" value="frozen" checked><span data-fr="Surgelée" data-ar="مجمّدة">Surgelée</span></label>
         <label><input type="radio" name="family-prep-2" value="ready"><span data-fr="Prête à préparer" data-ar="جاهزة للتحضير">Prête à préparer</span></label>
@@ -2154,7 +2587,7 @@ html body .hero-single-image {
     <img class="pack-image" src="images/packs/POULET2.png" alt="Pastilla poulet amandes 6–7 personnes" loading="lazy">
     <div class="pack-body">
       <h3 data-fr="Pastilla poulet amandes" data-ar="بسطيلة الدجاج واللوز">Pastilla poulet amandes</h3>
-      <p data-fr="6–7 personnes · 30 × 25 cm, rectangulaire" data-ar="6–7 أشخاص · 30 × 25 سم، مستطيلة">6–7 personnes · 30 × 25 cm, rectangulaire</p>
+      <p class="family-description" data-fr="6–7 personnes · 30 × 25 cm, rectangulaire" data-ar="6–7 أشخاص · 30 × 25 سم، مستطيلة">6–7 personnes · 30 × 25 cm, rectangulaire</p>
       <div class="prep-options">
         <label><input type="radio" name="family-prep-3" value="frozen" checked><span data-fr="Surgelée" data-ar="مجمّدة">Surgelée</span></label>
         <label><input type="radio" name="family-prep-3" value="ready"><span data-fr="Prête à préparer" data-ar="جاهزة للتحضير">Prête à préparer</span></label>
@@ -2168,7 +2601,7 @@ html body .hero-single-image {
     <img class="pack-image" src="images/packs/POISSON2.png" alt="Pastilla fruits de mer 6–7 personnes" loading="lazy">
     <div class="pack-body">
       <h3 data-fr="Pastilla fruits de mer" data-ar="بسطيلة بفواكه البحر">Pastilla fruits de mer</h3>
-      <p data-fr="6–7 personnes · 30 × 25 cm, rectangulaire" data-ar="6–7 أشخاص · 30 × 25 سم، مستطيلة">6–7 personnes · 30 × 25 cm, rectangulaire</p>
+      <p class="family-description" data-fr="6–7 personnes · 30 × 25 cm, rectangulaire" data-ar="6–7 أشخاص · 30 × 25 سم، مستطيلة">6–7 personnes · 30 × 25 cm, rectangulaire</p>
       <div class="prep-options">
         <label><input type="radio" name="family-prep-4" value="frozen" checked><span data-fr="Surgelée" data-ar="مجمّدة">Surgelée</span></label>
         <label><input type="radio" name="family-prep-4" value="ready"><span data-fr="Prête à préparer" data-ar="جاهزة للتحضير">Prête à préparer</span></label>
@@ -2182,7 +2615,7 @@ html body .hero-single-image {
     <img class="pack-image" src="images/packs/POULETT3.png" alt="Pastilla poulet amandes 10–12 personnes" loading="lazy">
     <div class="pack-body">
       <h3 data-fr="Pastilla poulet amandes" data-ar="بسطيلة الدجاج واللوز">Pastilla poulet amandes</h3>
-      <p data-fr="10–12 personnes · 45 cm" data-ar="10–12 شخصًا · 45 سم">10–12 personnes · 45 cm</p>
+      <p class="family-description" data-fr="10–12 personnes · 45 cm" data-ar="10–12 شخصًا · 45 سم">10–12 personnes · 45 cm</p>
       <div class="prep-options">
         <label><input type="radio" name="family-prep-5" value="frozen" checked><span data-fr="Surgelée" data-ar="مجمّدة">Surgelée</span></label>
         <label><input type="radio" name="family-prep-5" value="ready"><span data-fr="Prête à préparer" data-ar="جاهزة للتحضير">Prête à préparer</span></label>
@@ -2196,7 +2629,7 @@ html body .hero-single-image {
     <img class="pack-image" src="images/packs/POISSON3.png" alt="Pastilla fruits de mer 10–12 personnes" loading="lazy">
     <div class="pack-body">
       <h3 data-fr="Pastilla fruits de mer" data-ar="بسطيلة بفواكه البحر">Pastilla fruits de mer</h3>
-      <p data-fr="10–12 personnes · 45 cm" data-ar="10–12 شخصًا · 45 سم">10–12 personnes · 45 cm</p>
+      <p class="family-description" data-fr="10–12 personnes · 45 cm" data-ar="10–12 شخصًا · 45 سم">10–12 personnes · 45 cm</p>
       <div class="prep-options">
         <label><input type="radio" name="family-prep-6" value="frozen" checked><span data-fr="Surgelée" data-ar="مجمّدة">Surgelée</span></label>
         <label><input type="radio" name="family-prep-6" value="ready"><span data-fr="Prête à préparer" data-ar="جاهزة للتحضير">Prête à préparer</span></label>
