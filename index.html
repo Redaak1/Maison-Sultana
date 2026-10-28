@@ -2421,7 +2421,7 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
                   data-pack="Mini Pastilla Poulet Amandes"
                   data-ar-pack="ميني بسطيلة بالدجاج واللوز"
                   data-price-frozen="150"
-                  data-price-ready="170"
+                  data-price-ready="150"
                   data-fr="AJOUTER AU PANIER"
                   data-ar="أضف إلى السلة">AJOUTER AU PANIER</button>
         </div>
@@ -2450,7 +2450,7 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
                   data-pack="Mini Pastilla Fruits de mer"
                   data-ar-pack="ميني بسطيلة بفواكه البحر"
                   data-price-frozen="170"
-                  data-price-ready="190"
+                  data-price-ready="170"
                   data-fr="AJOUTER AU PANIER"
                   data-ar="أضف إلى السلة">AJOUTER AU PANIER</button>
         </div>
@@ -2479,7 +2479,7 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
                   data-pack="Briouates Poulet Epinards"
                   data-ar-pack="بريوات بالدجاج والسبانخ"
                   data-price-frozen="130"
-                  data-price-ready="150"
+                  data-price-ready="130"
                   data-fr="AJOUTER AU PANIER"
                   data-ar="أضف إلى السلة">AJOUTER AU PANIER</button>
         </div>
@@ -2508,7 +2508,7 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
                   data-pack="Nems Viande Hachee"
                   data-ar-pack="نيمس باللحم المفروم"
                   data-price-frozen="120"
-                  data-price-ready="140"
+                  data-price-ready="120"
                   data-fr="AJOUTER AU PANIER"
                   data-ar="أضف إلى السلة">AJOUTER AU PANIER</button>
         </div>
@@ -2537,7 +2537,7 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
                   data-pack="Nems Asiatiques"
                   data-ar-pack="نيمس آسيوية"
                   data-price-frozen="150"
-                  data-price-ready="170"
+                  data-price-ready="150"
                   data-fr="AJOUTER AU PANIER"
                   data-ar="أضف إلى السلة">AJOUTER AU PANIER</button>
         </div>
@@ -2846,11 +2846,21 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
         }
       }
 
+      const isPastillaFamille = Boolean(
+        card.closest("#pastilla-famille-produits")
+      );
+
       const basePrice = Number(
         choice === "ready"
           ? button.dataset.priceReady
           : button.dataset.priceFrozen
       );
+
+      // Pastilla Famille: always use the selected preparation's own price.
+      // Other collections keep their existing pricing behavior.
+      if (isPastillaFamille && (!Number.isFinite(basePrice) || basePrice <= 0)) {
+        console.error("Invalid Pastilla Famille price:", button.dataset);
+      }
       const pickerOutput = card.querySelector(".pack-quantity-picker output");
       const qty = Math.max(
         1,
@@ -2905,6 +2915,9 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
     function addToCart(button) {
       ignoreCartOpenUntil = Date.now() + 600;
       const card = button.closest(".pack");
+      const isPastillaFamille = Boolean(
+        card.closest("#pastilla-famille-produits")
+      );
       const { choice, price } = updatePackPrice(button);
       const name = button.dataset.pack;
       const arabicName = button.dataset.arPack || name;
@@ -2916,10 +2929,20 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
 
       if (existing) {
         existing.quantity += quantity;
+
+        // Refresh the selected price for Pastilla Famille items only.
+        if (isPastillaFamille) {
+          existing.price = Number(price);
+          existing.choice = choice;
+          existing.collection = "pastilla-famille";
+        }
       } else {
         cart.push({
           key, name, arabicName, image, pieces, choice,
-          price: Number(price), quantity
+          price: Number(price), quantity,
+          ...(isPastillaFamille
+            ? { collection: "pastilla-famille" }
+            : {})
         });
       }
 
@@ -2996,7 +3019,16 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
 
       const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
       const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      const preparationFee = cart.some(item => item.choice === "ready") ? 20 : 0;
+      const familyButtons = Array.from(
+        document.querySelectorAll("#pastilla-famille-produits button[data-pack]")
+      );
+      const isFamilyCartItem = item =>
+        item.collection === "pastilla-famille" ||
+        familyButtons.some(button => button.dataset.pack === item.name);
+
+      const preparationFee = cart.some(
+        item => item.choice === "ready" && !isFamilyCartItem(item)
+      ) ? 20 : 0;
       const total = subtotal + preparationFee;
       cartCountElement.textContent = totalQuantity;
       cartTotalElement.textContent = money(total);
