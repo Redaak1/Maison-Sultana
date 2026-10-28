@@ -1676,6 +1676,47 @@ html body .hero-single-image {
 }
 </style>
 
+
+<style id="mobile-hero-gap-final-fix">
+@media screen and (max-width: 767px) {
+  html body .hero-image-only {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html body .hero-image-only .hero-single-image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: top !important;
+  }
+
+  html body section.intro#packs {
+    margin: 0 !important;
+    padding: 4px 12px 8px !important;
+    min-height: 0 !important;
+  }
+
+  html body section.intro#packs h1,
+  html body section.intro#packs h2,
+  html body section.intro#packs p {
+    margin-top: 0 !important;
+  }
+
+  html body section.intro#packs h1,
+  html body section.intro#packs h2 {
+    padding-top: 0 !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
