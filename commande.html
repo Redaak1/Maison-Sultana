@@ -255,28 +255,23 @@ input:focus, textarea:focus, select:focus {
 
   if (!Array.isArray(orderCart)) orderCart = [];
 
-  // Prix officiels synchronisés avec les packs de index.html.
-  const officialPrices = {
-    "Pack Découverte": 199,
-    "Pack Sultana": 360,
-    "Duo Pastilla": 175,
-    "Poulet & Briouates": 150,
-    "Saveurs Marines": 175
-  };
-
+  // Accepter les anciens packs et les produits des nouvelles collections.
+  // Le prix vient du choix réellement effectué sur la page des produits.
   orderCart = orderCart
     .filter(item =>
       item &&
       typeof item.name === "string" &&
-      Object.prototype.hasOwnProperty.call(officialPrices, item.name) &&
+      item.name.trim() !== "" &&
+      Number.isFinite(Number(item.price)) &&
+      Number(item.price) >= 0 &&
       Number.isFinite(Number(item.quantity)) &&
-      Number(item.quantity) > 0 &&
       Number.isInteger(Number(item.quantity)) &&
+      Number(item.quantity) > 0 &&
       (item.choice === "ready" || item.choice === "frozen")
     )
     .map(item => ({
       ...item,
-      price: officialPrices[item.name],
+      price: Number(item.price),
       quantity: Number(item.quantity)
     }));
 
