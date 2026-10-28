@@ -1441,6 +1441,84 @@ html body .hero-single-image {
 }
 </style>
 
+
+<style id="mobile-product-card-fit">
+@media screen and (max-width: 767px) {
+  html body section.packs > article.pack .pack-body {
+    padding: 8px !important;
+    gap: 3px !important;
+  }
+
+  /* Bold product titles */
+  html body section.packs > article.pack h3 {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 2px !important;
+  }
+
+  /* Smaller descriptions */
+  html body section.packs > article.pack .pack-description {
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+    margin: 0 0 3px !important;
+  }
+
+  /* Smaller quantity and product details */
+  html body section.packs > article.pack .pack-quantity,
+  html body section.packs > article.pack .pack-items {
+    font-size: 9px !important;
+    line-height: 1.3 !important;
+    margin: 2px 0 4px !important;
+  }
+
+  html body section.packs > article.pack .price {
+    font-size: 10px !important;
+    margin: 3px 0 5px !important;
+  }
+
+  html body section.packs > article.pack .pack-price {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+  }
+
+  /* Compact preparation options */
+  html body section.packs > article.pack .prep-options label,
+  html body section.packs > article.pack .preparation-options label,
+  html body section.packs > article.pack .product-options label,
+  html body section.packs > article.pack .format-options label {
+    padding: 5px !important;
+    font-size: 9px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Compact quantity selector */
+  html body section.packs > article.pack .pack-quantity-picker {
+    gap: 9px !important;
+    margin: 4px 0 !important;
+  }
+
+  html body section.packs > article.pack .pack-quantity-picker button {
+    width: 26px !important;
+    height: 26px !important;
+    flex-basis: 26px !important;
+    font-size: 15px !important;
+  }
+
+  /* Smaller Add to Cart button */
+  html body section.packs > article.pack button,
+  html body section.packs > article.pack .button {
+    width: 100% !important;
+    min-height: 30px !important;
+    padding: 7px 4px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    border-radius: 6px !important;
+    white-space: normal !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
