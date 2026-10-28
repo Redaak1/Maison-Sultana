@@ -1208,6 +1208,28 @@ html body section.hero > .hero-image {
 }
 </style>
 
+
+<style id="hero-single-image-style">
+html body section.hero.hero-image-only {
+  display: block !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+html body .hero-single-image {
+  display: block !important;
+  width: 100% !important;
+  height: 510px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+@media screen and (max-width: 768px) {
+  html body .hero-single-image {
+    height: 300px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1240,10 +1262,11 @@ html body section.hero > .hero-image {
 <button class="language" id="languageBtn" type="button">العربية</button>
   </nav>
 </header>
-
   <main>
-    <section class="hero">
-      <div class="hero-image" role="img" aria-label="Ambiance culinaire"></div>
+    <section class="hero hero-image-only">
+      <img src="images/packs/Hero1.jpg"
+           alt="La Maison Sultana - Mini Pastillas"
+           class="hero-single-image">
     </section>
 
     <section class="intro" id="packs">
