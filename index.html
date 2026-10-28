@@ -1119,10 +1119,6 @@ html[dir="rtl"] .cart-drawer {
     border-bottom: 1px solid rgba(80,9,17,.14);
   }
 
-  header.phone-header-v2 > .phone-v2-menu > #languageBtn {
-    align-self: flex-start;
-    margin-top: 12px;
-  }
 }
 </style>
 
@@ -2245,7 +2241,7 @@ html {
     <a href="#pastilla-produits-start" data-fr="Nos pastillas" data-ar="بسطيلاتنا">Nos pastillas</a>
     <a href="#contact" data-fr="Contact" data-ar="تواصل معنا">Contact</a>
       
-<button class="language" id="languageBtn" type="button">العربية</button>
+
   </nav>
 </header>
   <main>
@@ -2865,9 +2861,6 @@ html {
         if (value !== undefined) element.innerHTML = value;
       });
 
-      document.getElementById("languageBtn").textContent =
-        language === "fr" ? "العربية" : "Français";
-
       document.querySelectorAll("[data-fr-placeholder][data-ar-placeholder]").forEach(element => {
         element.placeholder = element.dataset[language + "Placeholder"] || "";
       });
@@ -3182,10 +3175,6 @@ html {
     cartOverlay.addEventListener("click", closeCart);
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && cartDrawer.classList.contains("is-open")) closeCart();
-    });
-
-    document.getElementById("languageBtn").addEventListener("click", () => {
-      setLanguage(currentLanguage === "fr" ? "ar" : "fr");
     });
 
     document.querySelectorAll(".pack").forEach(card => {
