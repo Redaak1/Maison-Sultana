@@ -2181,6 +2181,38 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
 }
 </style>
 
+
+<style id="section-scroll-offset-fix">
+html {
+  scroll-behavior: smooth;
+}
+
+#first-pack-collection,
+#nos-packs,
+#pastilla-famille,
+#pastilla-famille-produits {
+  scroll-margin-top: 100px;
+}
+</style>
+
+
+<style id="product-menu-scroll-fix">
+#first-pack-collection .packs,
+#nos-packs + .packs,
+#pastilla-famille-produits {
+  scroll-margin-top: 100px;
+}
+</style>
+
+
+<style id="direct-product-scroll">
+#first-pack-collection,
+#nos-produits-start,
+#pastilla-produits-start {
+  scroll-margin-top: 100px;
+}
+</style>
+
 </head>
 
 <body>
@@ -2209,8 +2241,8 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
   <nav id="phoneV2Menu" class="phone-v2-menu">
     <a href="#first-pack-collection" data-fr="Nos packs" data-ar="العروض">Nos packs</a>
 
-    <a href="#nos-packs" data-fr="Nos produits" data-ar="منتجاتنا">Nos produits</a>
-    <a href="#pastilla-famille" data-fr="Nos pastillas" data-ar="بسطيلاتنا">Nos pastillas</a>
+    <a href="#nos-produits-start" data-fr="Nos produits" data-ar="منتجاتنا">Nos produits</a>
+    <a href="#pastilla-produits-start" data-fr="Nos pastillas" data-ar="بسطيلاتنا">Nos pastillas</a>
     <a href="#contact" data-fr="Contact" data-ar="تواصل معنا">Contact</a>
       
 <button class="language" id="languageBtn" type="button">العربية</button>
@@ -2401,7 +2433,8 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
       </p>
     </section>
 
-    <section class="packs nos-packs">
+    <div id="nos-produits-start"></div>
+<section class="packs nos-packs">
       <article class="pack featured">
         <img
           class="pack-image"
@@ -2572,6 +2605,7 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
   </p>
 </section>
 
+<div id="pastilla-produits-start"></div>
 <section class="packs nos-packs" id="pastilla-famille-produits">
   <article class="pack featured">
     <img class="pack-image" src="images/packs/POULET1.png" alt="Pastilla poulet amandes 3–4 personnes" loading="lazy">
