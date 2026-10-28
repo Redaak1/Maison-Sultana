@@ -1295,6 +1295,152 @@ html body .hero-single-image {
 }
 </style>
 
+
+<style id="mobile-professional-product-cards">
+@media screen and (max-width: 767px) {
+  html body section.packs {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px 10px !important;
+    padding: 16px 12px 40px !important;
+    align-items: start !important;
+  }
+
+  html body section.packs > article.pack,
+  html body section.packs > article.pack:nth-child(n) {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-column: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid #eadfD2 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(40, 20, 10, .05) !important;
+  }
+
+  html body section.packs > article.pack > .pack-image,
+  html body section.packs > article.pack > img.pack-image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3 !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  html body section.packs > article.pack .pack-body {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: left !important;
+    padding: 10px !important;
+    gap: 5px !important;
+  }
+
+  html body section.packs > article.pack .pack-number {
+    display: none !important;
+  }
+
+  html body section.packs > article.pack h3 {
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+    text-align: left !important;
+    margin: 0 0 3px !important;
+  }
+
+  html body section.packs > article.pack .pack-description {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+    min-height: 0 !important;
+    margin: 0 0 5px !important;
+  }
+
+  html body section.packs > article.pack .pack-quantity {
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+    margin: 0 0 5px !important;
+  }
+
+  html body section.packs > article.pack .pack-items {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+    padding-left: 14px !important;
+    margin: 4px 0 8px !important;
+  }
+
+  html body section.packs > article.pack .pack-items li {
+    margin-bottom: 2px !important;
+  }
+
+  html body section.packs > article.pack .price {
+    font-size: 11px !important;
+    margin: 4px 0 8px !important;
+    text-align: left !important;
+  }
+
+  html body section.packs > article.pack .pack-price {
+    font-size: 19px !important;
+    line-height: 1.2 !important;
+    font-weight: 800 !important;
+  }
+
+  html body section.packs > article.pack .prep-options,
+  html body section.packs > article.pack .preparation-options,
+  html body section.packs > article.pack .product-options,
+  html body section.packs > article.pack .format-options {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+    width: 100% !important;
+    margin: 5px 0 8px !important;
+  }
+
+  html body section.packs > article.pack .prep-options label,
+  html body section.packs > article.pack .preparation-options label,
+  html body section.packs > article.pack .product-options label,
+  html body section.packs > article.pack .format-options label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 5px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 7px 6px !important;
+    white-space: normal !important;
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+  }
+
+  html body section.packs > article.pack .pack-quantity-picker {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 7px 0 !important;
+  }
+
+  html body section.packs > article.pack .pack-quantity-picker button {
+    width: 30px !important;
+    height: 30px !important;
+    flex: 0 0 30px !important;
+    font-size: 18px !important;
+  }
+
+  html body section.packs > article.pack button,
+  html body section.packs > article.pack .button {
+    max-width: 100% !important;
+    font-size: 11px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
