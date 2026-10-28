@@ -2167,6 +2167,20 @@ body:has(#packs) section.packs:has(~ section.intro#nos-packs) .pack-description 
 }
 </style>
 
+
+<style id="desktop-fixed-header">
+@media (min-width: 761px) {
+  header.phone-header-v2 {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+}
+</style>
+
 </head>
 
 <body>
