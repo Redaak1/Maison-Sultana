@@ -1254,6 +1254,47 @@ html body .hero-single-image {
 }
 </style>
 
+
+<style id="mobile-two-column-packs">
+@media screen and (max-width: 767px) {
+  html body section.packs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px 12px !important;
+    align-items: stretch !important;
+  }
+
+  html body section.packs > article.pack,
+  html body section.packs > article.pack:nth-child(n) {
+    grid-column: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+  }
+
+  /* Center the fifth product in a five-product collection */
+  html body section.packs > article.pack:last-child:nth-child(odd) {
+    grid-column: 1 / -1 !important;
+    width: calc(50% - 6px) !important;
+    justify-self: center !important;
+  }
+
+  html body section.packs#pastilla-famille-produits > article.pack:last-child:nth-child(odd) {
+    grid-column: auto !important;
+    width: 100% !important;
+  }
+
+  html body section.packs > article.pack .pack-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3 !important;
+    object-fit: cover !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
