@@ -206,6 +206,82 @@ input:focus, textarea:focus, select:focus {
   }
 </style>
 
+
+<style id="sultana-white-page-theme">
+  body {
+    background: #FFFFFF !important;
+  }
+
+  .panel {
+    background: #FFFFFF !important;
+  }
+
+  input,
+  textarea,
+  select {
+    background: #FFFFFF !important;
+  }
+
+  .address-suggestion {
+    background: #FFFFFF !important;
+  }
+
+  #deliveryMap {
+    background: #FFFFFF !important;
+  }
+</style>
+
+
+<style id="whatsapp-button-match-cart">
+  button.submit[form="orderForm"] {
+    background: #B88738 !important;
+    color: #1F1F1F !important;
+    border: 1px solid #B88738 !important;
+  }
+
+  button.submit[form="orderForm"]:hover {
+    background: #F0E3D2 !important;
+    color: #500911 !important;
+  }
+</style>
+
+
+<style id="desktop-order-layout">
+  @media (min-width: 900px) {
+    .layout {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+      grid-template-areas:
+        "coordinates summary"
+        "coordinates fees" !important;
+      align-items: start !important;
+      gap: 24px !important;
+    }
+
+    .layout > section[aria-label="Résumé de la commande"] {
+      grid-area: summary;
+    }
+
+    .layout > section[aria-label="Récapitulatif des frais"] {
+      grid-area: fees;
+    }
+
+    .layout > section:not([aria-label="Résumé de la commande"]):not([aria-label="Récapitulatif des frais"]) {
+      grid-area: coordinates;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .layout {
+      grid-template-areas: none !important;
+    }
+
+    .layout > section {
+      grid-area: auto !important;
+    }
+  }
+</style>
+
 </head>
 <body>
 <header>
@@ -220,15 +296,6 @@ input:focus, textarea:focus, select:focus {
     <section class="panel" aria-label="Résumé de la commande">
       <h2>Résumé de votre commande</h2>
       <div id="orderCartItems" aria-live="polite"></div>
-      <div style="margin-top:14px;padding-top:14px;border-top:1px solid #d9c8b4">
-        <div style="font-size:13px;color:#70665d">Frais de préparation</div>
-        <div id="orderPreparationFee">0 DH</div>
-        <div style="font-size:13px;color:#70665d;margin-top:8px">Frais de livraison</div>
-        <div class="product-price" id="orderDeliveryFee">À calculer</div>
-        <div id="deliveryDistance" style="font-size:12px;color:#70665d;margin-top:4px">Sélectionnez votre position sur la carte pour calculer la livraison.</div>
-        <div style="font-size:13px;color:#70665d;margin-top:10px">Total de la commande</div>
-        <div class="product-price" id="orderTotal">—</div>
-      </div>
       <p class="product-note">Vérifiez votre commande avant de l'envoyer sur WhatsApp.</p>
     </section>
 
@@ -267,9 +334,44 @@ input:focus, textarea:focus, select:focus {
         <label for="notes">Remarques (facultatif)</label>
         <textarea id="notes" name="notes" rows="2" maxlength="500" placeholder="Instructions pour la livraison..."></textarea>
 
-        <button class="submit" type="submit">Envoyer ma commande sur WhatsApp</button>
-        <p class="privacy">Vos informations seront incluses dans le message WhatsApp afin de traiter votre commande. Vérifiez-les avant l'envoi.</p>
       </form>
+    </section>
+
+    <section class="panel" aria-label="Récapitulatif des frais">
+      <h2>Récapitulatif des frais</h2>
+
+      <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid #eee2d4">
+        <span style="font-size:14px;color:#70665d">Frais de préparation</span>
+        <strong id="orderPreparationFee">0 DH</strong>
+      </div>
+
+      <div style="padding:12px 0;border-bottom:1px solid #eee2d4">
+        <div style="display:flex;justify-content:space-between;gap:16px;align-items:center">
+          <span style="font-size:14px;color:#70665d">Frais de livraison</span>
+          <strong class="product-price" id="orderDeliveryFee">À calculer</strong>
+        </div>
+        <div id="deliveryDistance" style="font-size:12px;color:#70665d;margin-top:6px">
+          Sélectionnez votre position sur la carte pour calculer la livraison.
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;padding-top:18px">
+        <strong>Total de la commande</strong>
+        <strong class="product-price" id="orderTotal">—</strong>
+      </div>
+
+      <p class="product-note" style="margin-top:14px">
+        Le total inclut les produits, les frais de préparation éventuels et la livraison.
+      </p>
+
+      <div style="margin-top:20px">
+        <button class="submit" type="submit" form="orderForm" style="width:100%">
+          Envoyer ma commande sur WhatsApp
+        </button>
+        <p class="privacy" style="margin-top:12px">
+          Vos informations seront incluses dans le message WhatsApp afin de traiter votre commande. Vérifiez-les avant l'envoi.
+        </p>
+      </div>
     </section>
   </div>
 </main>
