@@ -2377,6 +2377,19 @@ html {
 
 </style>
 
+
+<style id="sultana-section-dividers">
+  /* Keep only the two gold dividers between the middle collections */
+  main > section.packs + section.intro::before {
+    content: "";
+    display: block;
+    width: min(600px, 85%);
+    height: 1px;
+    background: #B88738;
+    margin: 0 auto 28px;
+  }
+</style>
+
 </head>
 
 <body>
@@ -2419,7 +2432,7 @@ html {
            class="hero-single-image">
     </section>
 
-    <section class="intro" id="packs">
+    <section class="intro" id="packs" style="padding-bottom: 0;">
       <div class="eyebrow" data-fr="Notre sélection" data-ar="اختياراتنا">
         Notre sélection
       </div>
@@ -2434,7 +2447,7 @@ html {
       </p>
     </section>
 
-    <section class="packs" id="first-pack-collection">
+    <section class="packs" id="first-pack-collection" style="padding-top: 20px;">
       <article class="pack featured">
         <img class="pack-image" src="images/packs/decouverte.jpg" alt="Pack Découverte" loading="lazy">
 <div class="pack-body">
