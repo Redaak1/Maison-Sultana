@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#355E3B">
-<title>Finaliser ma commande | La Maison Sultana</title>
+<title> | La Maison Sultana</title>
 <style>
 :root {
   --burgundy: #355E3B;
@@ -282,13 +282,25 @@ input:focus, textarea:focus, select:focus {
   }
 </style>
 
+
+<style id="checkout-tagline-outside-header">
+.checkout-tagline {
+  margin: 0;
+  padding: 16px 16px 0;
+  text-align: center;
+  color: #B88738;
+  font-size: 14px;
+}
+</style>
+
 </head>
 <body>
 <header>
   <div class="brand">La Maison Sultana</div>
-  <h1>Finaliser ma commande</h1>
-  <p>Votre sélection, préparée avec soin.</p>
+  <h1></h1>
 </header>
+
+<p class="checkout-tagline">Votre sélection, préparée avec soin.</p>
 
 <main>
   <a class="back" id="backLink" href="https://redaak1.github.io/Maison-Sultana/">← Retour aux packs</a>
@@ -415,7 +427,12 @@ input:focus, textarea:focus, select:focus {
   const deliveryDistanceElement = document.getElementById("deliveryDistance");
   const orderSubmitButton = document.querySelector('#orderForm button[type="submit"]');
 
-  const preparationFee = orderCart.some(item => item.choice === "ready") ? 20 : 0;
+  const isFamilyPastillaItem = item =>
+    item.collection === "pastilla-famille";
+
+  const preparationFee = orderCart.some(
+    item => item.choice === "ready" && !isFamilyPastillaItem(item)
+  ) ? 20 : 0;
   const subtotal = orderCart.reduce((sum, item) =>
     sum + Number(item.price) * Number(item.quantity), 0);
 
