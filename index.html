@@ -2468,7 +2468,7 @@ html {
 
     <section class="packs" id="first-pack-collection" style="padding-top: 20px;">
       <article class="pack featured">
-        <img class="pack-image" src="images/packs/1.png" alt="Pack Découverte" loading="lazy">
+        <img class="pack-image" src="images/packs/Le Coffret Sultana.png" alt="Pack Découverte" loading="lazy">
 <div class="pack-body">
           <p class="pack-quantity" data-fr="15 PIÈCES" data-ar="15 حبة">15 PIÈCES</p>
           <ul class="pack-items"><li data-fr="3 × Pastillas au poisson" data-ar="3 × بسطيلات السمك">3 × Pastillas au poisson</li><li data-fr="3 × Pastillas au poulet" data-ar="3 × بسطيلات الدجاج">3 × Pastillas au poulet</li><li data-fr="3 × Briouates" data-ar="3 × بريوات">3 × Briouates</li><li data-fr="3 × Nems à la viande hachée" data-ar="3 × نيمس باللحم المفروم">3 × Nems à la viande hachée</li><li data-fr="3 × Nems asiatiques" data-ar="3 × نيمس آسيوية">3 × Nems asiatiques</li></ul>
@@ -2494,7 +2494,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
-        <img class="pack-image" src="images/packs/2.png" alt="Le Grand Assortiment" loading="lazy">
+        <img class="pack-image" src="images/packs/Le Grand Festin.png" alt="Le Grand Assortiment" loading="lazy">
 
         <div class="pack-body">
           <p class="pack-description" data-fr="Cinq spécialités, six pièces de chaque." data-ar="خمس نكهات، ست حبات من كل نوع.">Cinq spécialités, six pièces de chaque.</p>
@@ -2521,7 +2521,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
-        <img class="pack-image" src="images/packs/3.png" alt="Duo Pastilla" loading="lazy">
+        <img class="pack-image" src="images/packs/Le Duo Signature.png" alt="Duo Pastilla" loading="lazy">
 
         <div class="pack-body">
           <p class="pack-description" data-fr="Pastillas au poulet et au poisson, à partager." data-ar="بسطيلات الدجاج والسمك للمشاركة.">Pastillas au poulet et au poisson, à partager.</p>
@@ -2548,7 +2548,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
-        <img class="pack-image" src="images/packs/4.png" alt="Poulet & Briouates" loading="lazy">
+        <img class="pack-image" src="images/packs/Les Délices du Poulet.png" alt="Poulet & Briouates" loading="lazy">
 
         <div class="pack-body">
           <p class="pack-description" data-fr="Un duo savoureux aux inspirations marocaines." data-ar="مزيج لذيذ بنكهات مغربية.">Un duo savoureux aux inspirations marocaines.</p>
@@ -2575,7 +2575,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
-        <img class="pack-image" src="images/packs/5.png" alt="Saveurs Marines" loading="lazy">
+        <img class="pack-image" src="images/packs/Escale Marine.png" alt="Saveurs Marines" loading="lazy">
 
         <div class="pack-body">
           <p class="pack-description" data-fr="Pastillas au poisson et nems asiatiques." data-ar="بسطيلات السمك والنيمس الآسيوية.">Pastillas au poisson et nems asiatiques.</p>
@@ -2604,32 +2604,41 @@ html {
       
     </section>
 
-    <section class="intro" id="nos-packs">
+    
+<style id="nos-produits-subtitle-gold">
+html body section.intro#nos-packs > p {
+  color: #B88738 !important;
+}
+</style>
+
+<section class="intro" id="nos-packs">
       <div class="eyebrow" data-fr="Notre sélection" data-ar="اختياراتنا">
         Notre sélection
       </div>
 
-      <h2 data-fr="Nos produits" data-ar="منتجاتنا">Nos produits</h2>
+      <h2 data-fr="Nos Délices Signature" data-ar="أشهى اختيارات سلطانة">Nos Délices Signature</h2>
 
       <div class="gold-line"></div>
 
-      <p data-fr="Choisissez vos spécialités et votre préparation préférée."
-         data-ar="اختاروا منتجاتكم وطريقة التحضير المفضلة لديكم.">
-        Choisissez vos spécialités et votre préparation préférée.
+      <p data-fr="L’élégance du fait maison, le plaisir à chaque bouchée."
+         data-ar="أناقة المذاق المنزلي ومتعة في كل لقمة.">
+        L’élégance du fait maison, le plaisir à chaque bouchée.
       </p>
     </section>
 
-    <div id="nos-produits-start"></div>
+    
+<style id="hide-nos-products-titles">
+/* Hide visible product names only in the Nos produits collection.
+   Keep product data and order buttons intact. */
+html body section.packs.nos-packs:not(#pastilla-famille-produits) .pack-body > h3 {
+  display: none !important;
+}
+</style>
+
+<div id="nos-produits-start"></div>
 <section class="packs nos-packs">
       <article class="pack featured">
-        <img
-          class="pack-image"
-          src="images/packs/poulet.jpg"
-          data-frozen-src="images/packs/poulet.jpg"
-          data-ready-src="images/packs/poulet1.jpg"
-          alt="Mini Pastilla Poulet Amandes"
-          loading="lazy"
-        >
+        <img class="pack-image" src="images/packs/Mini Pastilla Poulet Amandes.png" alt="Mini Pastilla Poulet Amandes" loading="lazy">
         <div class="pack-body">
           <h3 data-fr="Mini Pastilla Poulet Amandes" data-ar="ميني بسطيلة بالدجاج واللوز">Mini Pastilla Poulet Amandes</h3>
           <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
@@ -2660,6 +2669,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
+        <img class="pack-image" src="images/packs/Mini Pastilla Fruits de mer.png" alt="Mini Pastilla Fruits de mer" loading="lazy">
         <div class="pack-body">
           <h3 data-fr="Mini Pastilla Fruits de mer" data-ar="ميني بسطيلة بفواكه البحر">Mini Pastilla Fruits de mer</h3>
           <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
@@ -2690,6 +2700,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
+        <img class="pack-image" src="images/packs/Briouates Poulet Epinards.png" alt="Briouates Poulet Epinards" loading="lazy">
         <div class="pack-body">
           <h3 data-fr="Briouates Poulet Epinards" data-ar="بريوات بالدجاج والسبانخ">Briouates Poulet Epinards</h3>
           <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
@@ -2720,6 +2731,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
+        <img class="pack-image" src="images/packs/Nems  Viande Hachee.png" alt="Nems Viande Hachee" loading="lazy">
         <div class="pack-body">
           <h3 data-fr="Nems Viande Hachee" data-ar="نيمس باللحم المفروم">Nems Viande Hachee</h3>
           <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
@@ -2750,6 +2762,7 @@ html {
         </div>
       </article>
       <article class="pack featured">
+        <img class="pack-image" src="images/packs/Nems Asiatiques.png" alt="Nems Asiatiques" loading="lazy">
         <div class="pack-body">
           <h3 data-fr="Nems Asiatiques" data-ar="نيمس آسيوية">Nems Asiatiques</h3>
           <p class="pack-quantity" data-fr="12 pièces" data-ar="12 حبة">12 pièces</p>
@@ -2782,14 +2795,27 @@ html {
     </section>
 
 <section class="intro" id="pastilla-famille">
-  <div class="eyebrow" data-fr="Nos spécialités familiales" data-ar="اختيارات العائلة">Nos spécialités familiales</div>
-  <h2 data-fr="Nos pastillas" data-ar="بسطيلاتنا">Nos pastillas</h2>
+  <div class="eyebrow" data-fr="Notre collection familiale" data-ar="مجموعتنا العائلية">Notre collection familiale</div>
+  <h2 data-fr="Nos Pastillas Familiales" data-ar="بسطيلاتنا العائلية">Nos Pastillas Familiales</h2>
   <div class="gold-line"></div>
-  <p data-fr="Nos pastillas généreuses, préparées pour partager de beaux moments."
-     data-ar="بسطيلات شهية بأحجام عائلية، مثالية للمشاركة في أجمل اللحظات.">
-    Nos pastillas généreuses, préparées pour partager de beaux moments.
+  <p data-fr="De généreuses créations pour sublimer vos moments de partage."
+     data-ar="إبداعات سخية تضفي لمسة مميزة على لحظاتكم العائلية.">
+    De généreuses créations pour sublimer vos moments de partage.
   </p>
 </section>
+
+
+<style id="pastilla-family-heading-style">
+html body section.intro#pastilla-famille > p {
+  color: #B88738 !important;
+}
+
+/* Hide only product names in the family collection.
+   Keep family sizes, preparation options, prices and order buttons. */
+html body section.packs#pastilla-famille-produits .pack-body > h3 {
+  display: none !important;
+}
+</style>
 
 <div id="pastilla-produits-start"></div>
 <section class="packs nos-packs" id="pastilla-famille-produits">
