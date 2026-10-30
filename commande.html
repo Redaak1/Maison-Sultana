@@ -319,19 +319,19 @@ input:focus, textarea:focus, select:focus {
   <h1></h1>
 </header>
 
-<p class="checkout-tagline">Votre sélection, préparée avec soin.</p>
+
 
 <main>
   <a class="back" id="backLink" href="https://redaak1.github.io/Maison-Sultana/">← Retour aux packs</a>
   <div class="layout">
     <section class="panel" aria-label="Résumé de la commande">
-      <h2>Résumé de votre commande</h2>
+      <h2 style="font-size:18px">Résumé de votre commande</h2>
       <div id="orderCartItems" aria-live="polite"></div>
       <p class="product-note">Vérifiez votre commande avant de l'envoyer sur WhatsApp.</p>
     </section>
 
     <section class="panel">
-      <h2>Vos coordonnées</h2>
+      
       <form id="orderForm">
         <label for="customerName">Nom complet *</label>
         <input id="customerName" name="customerName" autocomplete="name" required maxlength="100" placeholder="Votre nom et prénom">
@@ -357,19 +357,16 @@ input:focus, textarea:focus, select:focus {
 
         <label for="customerAddress">Adresse de livraison *</label>
         <textarea id="customerAddress" name="customerAddress"
-          autocomplete="street-address" required maxlength="500" rows="3"
-          placeholder="Saisissez votre quartier, rue, numéro, immeuble et étage..."></textarea>
+          autocomplete="street-address" required maxlength="500" rows="1"
+          placeholder="Immeuble, étage..."></textarea>
         <input type="hidden" id="deliveryLatitude" name="deliveryLatitude">
         <input type="hidden" id="deliveryLongitude" name="deliveryLongitude">
-
-        <label for="notes">Remarques (facultatif)</label>
-        <textarea id="notes" name="notes" rows="2" maxlength="500" placeholder="Instructions pour la livraison..."></textarea>
 
       </form>
     </section>
 
     <section class="panel" aria-label="Récapitulatif des frais">
-      <h2>Récapitulatif des frais</h2>
+      
 
       <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid #eee2d4">
         <span style="font-size:14px;color:#70665d">Frais de préparation</span>
@@ -793,5 +790,22 @@ input:focus, textarea:focus, select:focus {
   });
 })();
 </script>
+
+<script id="auto-resize-delivery-address">
+(function () {
+  const address = document.getElementById('customerAddress');
+  if (!address) return;
+
+  function resizeAddress() {
+    address.style.height = 'auto';
+    address.style.height = Math.max(address.scrollHeight, 42) + 'px';
+  }
+
+  address.addEventListener('input', resizeAddress);
+  window.addEventListener('load', resizeAddress);
+  resizeAddress();
+})();
+</script>
+
 </body>
 </html>
